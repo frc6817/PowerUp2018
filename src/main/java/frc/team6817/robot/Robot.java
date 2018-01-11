@@ -20,6 +20,9 @@ public class Robot extends TimedRobot
     private SendableChooser<CommandGroup> _autoChooser = new SendableChooser<>();   // Auto chooser
 
 
+    /**
+     * Initializes controls and adds autonomous chooser element to the SmartDashboard
+     */
     @Override
     public void robotInit()
     {
@@ -73,6 +76,9 @@ public class Robot extends TimedRobot
     }
 
 
+    /**
+     * Called periodically in autonomous- runs the scheduler
+     */
     @Override
     public void autonomousPeriodic()
     {
@@ -80,6 +86,9 @@ public class Robot extends TimedRobot
     }
 
 
+    /**
+     * Called periodically in teleOp- runs the scheduler
+     */
     @Override
     public void teleopPeriodic()
     {
