@@ -1,0 +1,14 @@
+To build the code onto the RoboRIO:
+
+Commit all code to remote repo @ either: 
+origin/master (ONLY IF WORKING AND DEBUGGED CODE)
+origin/develop (EVERYTHING ELSE)
+
+Then, go to the driver station.
+Clone and/or pull all the code from whichever branch you committed to.
+Then, open powershell.
+cd into the git directory, BUT NO FURTHER.
+Plug into the RoboRIO
+run ./gradlew deploy.
+This should work. If not, consult the Open-RIO github and read the readme.
+
