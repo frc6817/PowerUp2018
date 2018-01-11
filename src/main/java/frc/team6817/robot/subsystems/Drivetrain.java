@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 
+/**
+ * Drivetrain subsystem of the Power Up robot. It is a 6-wheel drop center running 4 motors,
+ * two on each side running the Cheesy Drive.
+ */
 public class Drivetrain extends Subsystem
 {
     private Talon _lfController = new Talon(0);
@@ -22,6 +26,9 @@ public class Drivetrain extends Subsystem
     private DifferentialDrive _drive = new DifferentialDrive(_lGroup , _rGroup);
 
 
+    /**
+     * Initializes the default command of the drivetrain. Currently, that is nothing
+     */
     @Override
     protected void initDefaultCommand()
     {
@@ -30,13 +37,19 @@ public class Drivetrain extends Subsystem
 
 
     /**
-     * Drives the drivetrain in TeleOp. Skrrt skrrt.
+     * Drives the drivetrain in TeleOp using an automatic version of the Cheesy Drive. QuickTurn is run
+     * when the forward/backward throttle is less than .05
+     *
+     * Skrrt skrrt.
      *
      * @param driver XBox controller that drives the drivetrain
      */
     public void teleOpDrive(XboxController driver)
     {
-        _drive.arcadeDrive(driver.getY(GenericHID.Hand.kLeft) , driver.getX(GenericHID.Hand.kRight));
+        double leftY = driver.getY(GenericHID.Hand.kLeft);
+        double rightX = driver.getX(GenericHID.Hand.kRight);
+
+        _drive.curvatureDrive(leftY , rightX , leftY < .05);
     }
 
 
