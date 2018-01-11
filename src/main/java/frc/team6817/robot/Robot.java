@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.AutoLine;
-import frc.team6817.robot.subsystems.Drivetrain;
+import frc.team6817.robot.Subsystems.Drivetrain;
 
 
 public class Robot extends TimedRobot
@@ -36,7 +36,7 @@ public class Robot extends TimedRobot
     @Override
     public void disabledInit()
     {
-
+        _drivetrain.stop();
     }
 
 
