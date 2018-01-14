@@ -2,21 +2,23 @@ package frc.team6817.robot;
 
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.AutoLine;
+import frc.team6817.robot.Autonomous.TestAuto;
 import frc.team6817.robot.Subsystems.Drivetrain;
 
 
 public class Robot extends TimedRobot
 {
-    private static final Drivetrain _drivetrain = new Drivetrain();
+    public static final Drivetrain drivetrain = new Drivetrain();
 
     private static OI _oi;
 
-    private SendableChooser<CommandGroup> _autoChooser = new SendableChooser<>();   // Auto chooser
+    private SendableChooser<Command> _autoChooser = new SendableChooser<>();       // Auto chooser
 
 
     /**
@@ -29,13 +31,15 @@ public class Robot extends TimedRobot
 
         _autoChooser.addDefault("Baseline Auto" , new AutoLine());
         SmartDashboard.putData("Auto mode" , _autoChooser);
+
+        _autoChooser.addObject("Test Auto" , new TestAuto());
     }
 
 
     @Override
     public void disabledInit()
     {
-        _drivetrain.stop();
+        drivetrain.stop();
     }
 
 
@@ -45,7 +49,8 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        CommandGroup auto = _autoChooser.getSelected();
+        Command auto = _autoChooser.getSelected();
+        auto = new TestAuto();
 
         if(auto != null)
         {
@@ -93,7 +98,7 @@ public class Robot extends TimedRobot
     {
         Scheduler.getInstance().run();
 
-        _drivetrain.teleOpDrive(_oi.controller1());
+        drivetrain.teleOpDrive(_oi.controller1());
     }
 
 

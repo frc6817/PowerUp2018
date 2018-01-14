@@ -45,7 +45,24 @@ public class Drivetrain extends Subsystem
         double leftY = driver.getY(GenericHID.Hand.kLeft);
         double rightX = driver.getX(GenericHID.Hand.kRight);
 
+        // Just so that the drivetrain is driveable for now
+        leftY *=.5;
+        rightX *= .5;
+
         drive.curvatureDrive(leftY , rightX , leftY < .05);
+    }
+
+
+    /**
+     * Drives the drivetrain given a leftPower and a rightPower. Runs tank drive configuration.
+     *
+     * @param leftPower Power to apply to the left side
+     * @param rightPower Power to apply to the right side
+     * @param scale Whether to scale power or not
+     */
+    public void tankDrive(double leftPower , double rightPower , boolean scale)
+    {
+        drive.tankDrive(leftPower, rightPower, scale);
     }
 
 
