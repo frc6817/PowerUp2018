@@ -2,8 +2,12 @@ package frc.team6817.robot;
 
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.team6817.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.team6817.robot.Autonomous.AutoLine;
+import frc.team6817.robot.Subsystems.Drivetrain;
 
 
 public class Robot extends TimedRobot
@@ -12,25 +16,41 @@ public class Robot extends TimedRobot
 
     private static OI _oi;
 
+    private SendableChooser<CommandGroup> _autoChooser = new SendableChooser<>();   // Auto chooser
 
+
+    /**
+     * Initializes controls and adds autonomous chooser element to the SmartDashboard
+     */
     @Override
     public void robotInit()
     {
         _oi = new OI(0 , 1);
+
+        _autoChooser.addDefault("Baseline Auto" , new AutoLine());
+        SmartDashboard.putData("Auto mode" , _autoChooser);
     }
 
 
     @Override
     public void disabledInit()
     {
-
+        _drivetrain.stop();
     }
 
 
+    /**
+     * Grabs the current selected autonomous from the SmartDashboard and starts it
+     */
     @Override
     public void autonomousInit()
     {
+        CommandGroup auto = _autoChooser.getSelected();
 
+        if(auto != null)
+        {
+            auto.start();
+        }
     }
 
 
@@ -55,6 +75,9 @@ public class Robot extends TimedRobot
     }
 
 
+    /**
+     * Called periodically in autonomous- runs the scheduler
+     */
     @Override
     public void autonomousPeriodic()
     {
@@ -62,6 +85,9 @@ public class Robot extends TimedRobot
     }
 
 
+    /**
+     * Called periodically in teleOp- runs the scheduler
+     */
     @Override
     public void teleopPeriodic()
     {
