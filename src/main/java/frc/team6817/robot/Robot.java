@@ -16,7 +16,6 @@ public class Robot extends TimedRobot
 
     private static OI _oi;
 
-    private CommandGroup _auto;                                                     // Autonomous to run
     private SendableChooser<CommandGroup> _autoChooser = new SendableChooser<>();   // Auto chooser
 
 
@@ -46,11 +45,11 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        _auto = _autoChooser.getSelected();
+        CommandGroup auto = _autoChooser.getSelected();
 
-        if(_auto != null)
+        if(auto != null)
         {
-            _auto.start();
+            auto.start();
         }
     }
 
