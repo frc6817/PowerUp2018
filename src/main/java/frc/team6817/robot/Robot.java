@@ -51,8 +51,10 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        Command auto = new TestAuto();
-        auto.start();
+        if(_autoChooser.getSelected() != null)
+        {
+            _autoChooser.getSelected().start();
+        }
     }
 
 
