@@ -8,6 +8,13 @@ public class TestAuto extends CommandGroup
 {
     public TestAuto()
     {
-        addSequential(new DriveForTime(500));
+        if(FMSReader.nearSwitch() == 'L')
+        {
+            addSequential(new DriveForTime(.5 , .5 ,500));
+        }
+        else
+        {
+            addSequential(new DriveForTime(-.5 , -.5 , 500));
+        }
     }
 }

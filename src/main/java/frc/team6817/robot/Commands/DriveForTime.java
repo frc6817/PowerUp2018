@@ -8,6 +8,8 @@ import static frc.team6817.robot.Robot.drivetrain;
 
 public class DriveForTime extends Command
 {
+    private double _leftPower;
+    private double _rightPower;
     private long _time;
 
     private boolean _finished = false;
@@ -18,13 +20,17 @@ public class DriveForTime extends Command
      *
      * Invokes superconstructor.
      *
+     * @param LEFT_POWER Power to set to the left side
+     * @param RIGHT_POWER Power to set to the right side
      * @param TIME Time to drive to in milliseconds
      */
-    public DriveForTime(final long TIME)
+    public DriveForTime(final double LEFT_POWER , final double RIGHT_POWER , final long TIME)
     {
         super();
 
         requires(drivetrain);
+        _leftPower = LEFT_POWER;
+        _rightPower = RIGHT_POWER;
         _time = TIME;
     }
 
@@ -37,7 +43,7 @@ public class DriveForTime extends Command
         //noinspection StatementWithEmptyBody
         while(System.currentTimeMillis() - startTime < _time)
         {
-            drivetrain.tankDrive(-.5 , -.5 , false);
+            drivetrain.tankDrive(-_leftPower , -_rightPower , false);
         }
 
         _finished = true;

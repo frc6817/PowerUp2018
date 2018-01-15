@@ -1,13 +1,14 @@
 package frc.team6817.robot;
 
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.AutoLine;
+import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Autonomous.TestAuto;
 import frc.team6817.robot.Subsystems.Drivetrain;
 
@@ -30,9 +31,10 @@ public class Robot extends TimedRobot
         _oi = new OI(0 , 1);
 
         _autoChooser.addDefault("Baseline Auto" , new AutoLine());
+        _autoChooser.addObject("Test Auto" , new TestAuto());
         SmartDashboard.putData("Auto mode" , _autoChooser);
 
-        _autoChooser.addObject("Test Auto" , new TestAuto());
+        CameraServer.getInstance().startAutomaticCapture();
     }
 
 
@@ -49,13 +51,8 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        Command auto = _autoChooser.getSelected();
-        auto = new TestAuto();
-
-        if(auto != null)
-        {
-            auto.start();
-        }
+        Command auto = new TestAuto();
+        auto.start();
     }
 
 
@@ -76,7 +73,7 @@ public class Robot extends TimedRobot
     @Override
     public void disabledPeriodic()
     {
-
+        FMSReader.readFMS();
     }
 
 
