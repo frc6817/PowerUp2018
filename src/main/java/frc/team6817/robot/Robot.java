@@ -34,7 +34,7 @@ public class Robot extends TimedRobot
         _autoChooser.addObject("Test Auto" , new TestAuto());
         SmartDashboard.putData("Auto mode" , _autoChooser);
 
-        CameraServer.getInstance().startAutomaticCapture();
+        CameraManager.start();
     }
 
 
