@@ -1,7 +1,7 @@
 package frc.team6817.robot;
 
 
-import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -23,7 +23,7 @@ public class Robot extends TimedRobot
 
 
     /**
-     * Initializes controls and adds autonomous chooser element to the SmartDashboard
+     * Initializes controls and adds autonomous chooser element to the SmartDashboard. Also starts the camera server.
      */
     @Override
     public void robotInit()
@@ -91,6 +91,8 @@ public class Robot extends TimedRobot
 
     /**
      * Called periodically in teleOp- runs the scheduler
+     *
+     * Also handles controls not defined as commands (ex. Camera Switching)
      */
     @Override
     public void teleopPeriodic()
@@ -98,6 +100,11 @@ public class Robot extends TimedRobot
         Scheduler.getInstance().run();
 
         drivetrain.teleOpDrive(_oi.controller1());
+
+        if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
+        {
+            CameraManager.switchCameras();
+        }
     }
 
 
