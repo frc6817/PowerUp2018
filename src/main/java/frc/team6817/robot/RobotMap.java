@@ -3,6 +3,7 @@ package frc.team6817.robot;
 
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Talon;
 
 
 /**
@@ -21,4 +22,8 @@ public class RobotMap
     // Block Intake controllers
     public static final Victor lIntakeController = new Victor(4);
     public static final Victor rIntakeController = new Victor(5);
+
+    //Lift Controllers
+    public static final Talon liftController1 = new Talon(4);
+    public static final Talon liftController2 = new Talon(5);
 }

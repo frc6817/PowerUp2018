@@ -12,6 +12,7 @@ import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Autonomous.TestAuto;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
+import frc.team6817.robot.Subsystems.Lift;
 
 
 /**
@@ -24,7 +25,10 @@ import frc.team6817.robot.Subsystems.Drivetrain;
 @SuppressWarnings("WeakerAccess")
 public class Robot extends TimedRobot
 {
+
+    final double TRIGGERBUFFER = .1;
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final Lift lift = new Lift();
     public static final BlockIntake blockIntake = new BlockIntake();
 
     private static OI _oi;
@@ -112,10 +116,21 @@ public class Robot extends TimedRobot
         drivetrain.teleOpDrive(_oi.controller1());
 
         if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
-        {
+         {
             CameraManager.switchCameras();
         }
 
+        if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) > TRIGGERBUFFER)
+        {
+            lift.setState(Lift.State.UP,_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) );
+        }else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft)> TRIGGERBUFFER)
+        {
+            lift.setState(Lift.State.DOWN,_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft));
+        }
+        else
+        {
+            lift.setState(Lift.State.STOP, 0);
+        }
 
         if(_oi.controller1().getAButtonPressed())
         {
@@ -135,6 +150,8 @@ public class Robot extends TimedRobot
         {
             blockIntake.setState(BlockIntake.State.STOP);
         }
+
+
     }
 
 
