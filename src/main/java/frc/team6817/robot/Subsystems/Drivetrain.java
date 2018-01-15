@@ -21,6 +21,8 @@ public class Drivetrain extends Subsystem
 
     public final DifferentialDrive drive = new DifferentialDrive(_lGroup , _rGroup);
 
+    private boolean _slowOn = false;
+
 
     /**
      * Initializes the default command of the drivetrain. Currently, that is nothing
@@ -42,12 +44,16 @@ public class Drivetrain extends Subsystem
      */
     public void teleOpDrive(XboxController driver)
     {
+        final double SLOW_MULTIPLIER = .5;
+
         double leftY = driver.getY(GenericHID.Hand.kLeft);
         double rightX = driver.getX(GenericHID.Hand.kRight);
 
-        // Just so that the drivetrain is driveable for now
-        leftY *=.5;
-        rightX *= .5;
+        if(_slowOn)
+        {
+            leftY *= SLOW_MULTIPLIER;
+            rightX *= SLOW_MULTIPLIER;
+        }
 
         drive.curvatureDrive(leftY , rightX , leftY < .05);
     }
@@ -63,6 +69,24 @@ public class Drivetrain extends Subsystem
     public void tankDrive(double leftPower , double rightPower , boolean scale)
     {
         drive.tankDrive(leftPower, rightPower, scale);
+    }
+
+
+    /**
+     * Toggles on or off slow mode (50% drivetrain power)
+     */
+    public void toggleSlow()
+    {
+        _slowOn = !_slowOn;
+    }
+
+
+    /**
+     * @return Whether the drivetrain is in slow mode or not
+     */
+    public boolean isSlow()
+    {
+        return _slowOn;
     }
 
 

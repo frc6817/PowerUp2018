@@ -10,12 +10,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.AutoLine;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Autonomous.TestAuto;
+import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
 
 
+/**
+ * Main Robot class for Team 6817 POWER UP
+ *
+ * Declare Subsystems here
+ *
+ * Robot modes (teleOp , auto , etc.) are defined and controller here
+ */
+@SuppressWarnings("WeakerAccess")
 public class Robot extends TimedRobot
 {
     public static final Drivetrain drivetrain = new Drivetrain();
+    public static final BlockIntake blockIntake = new BlockIntake();
 
     private static OI _oi;
 
@@ -104,6 +114,26 @@ public class Robot extends TimedRobot
         if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
         {
             CameraManager.switchCameras();
+        }
+
+
+        if(_oi.controller1().getAButtonPressed())
+        {
+            drivetrain.toggleSlow();
+        }
+
+
+        if(_oi.controller2().getBumper(GenericHID.Hand.kRight))
+        {
+            blockIntake.setState(BlockIntake.State.IN);
+        }
+        else if(_oi.controller2().getBumper(GenericHID.Hand.kLeft))
+        {
+            blockIntake.setState(BlockIntake.State.IN);
+        }
+        else
+        {
+            blockIntake.setState(BlockIntake.State.STOP);
         }
     }
 
