@@ -24,6 +24,6 @@ public class RobotMap
     public static final Victor rIntakeController = new Victor(5);
 
     //Lift Controllers
-    public static final Talon liftController1 = new Talon(4);
-    public static final Talon liftController2 = new Talon(5);
+    public static final Talon liftController1 = new Talon(6);
+    public static final Talon liftController2 = new Talon(7);
 }
