@@ -54,7 +54,7 @@ public class Lift extends Subsystem {
     /**
      * Stops the Lift motors
      */
-    public void stop()
+    private void stop()
     {
         _liftLgroup.stopMotor();
         _liftRgroup.stopMotor();

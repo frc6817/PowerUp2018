@@ -68,7 +68,7 @@ public class BlockIntake extends Subsystem
     /**
      * Stops the motors
      */
-    public void stop()
+    private void stop()
     {
         _leftController.stopMotor();
         _rightController.stopMotor();
