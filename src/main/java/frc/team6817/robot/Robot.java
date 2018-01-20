@@ -1,6 +1,7 @@
 package frc.team6817.robot;
 
 
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -33,7 +34,7 @@ public class Robot extends TimedRobot
 
     private static OI _oi;
 
-    private SendableChooser<Command> _autoChooser = new SendableChooser<>();       // Auto chooser
+    private SendableChooser<String> _autoChooser = new SendableChooser<>();
 
 
     /**
@@ -44,11 +45,11 @@ public class Robot extends TimedRobot
     {
         _oi = new OI(0 , 1);
 
-        _autoChooser.addDefault("Baseline Auto" , new AutoLine());
-        _autoChooser.addObject("Test Auto" , new TestAuto());
-        SmartDashboard.putData("Auto mode" , _autoChooser);
+//        _autoChooser.addDefault();
 
         CameraManager.start();
+
+        TableServer.testRun();
     }
 
 
@@ -65,9 +66,24 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        if(_autoChooser.getSelected() != null)
+        Command auto;
+
+        String autoSelected = SmartDashboard.getString("Auto Selector" , "AutoLine");
+
+        switch(autoSelected)
         {
-            _autoChooser.getSelected().start();
+            case "AutoLine":
+                auto = new AutoLine();
+                break;
+
+            default:
+                auto = null;
+                break;
+        }
+
+        if(auto != null)
+        {
+            auto.start();
         }
     }
 
