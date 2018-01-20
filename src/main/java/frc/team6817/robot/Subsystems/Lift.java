@@ -3,12 +3,11 @@ package frc.team6817.robot.Subsystems;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import static frc.team6817.robot.RobotMap.liftController1;
-import static frc.team6817.robot.RobotMap.liftController2;
+import static frc.team6817.robot.RobotMap.*;
 
 public class Lift extends Subsystem {
-    private SpeedControllerGroup _liftLgroup =  new SpeedControllerGroup(liftController1);
-    private SpeedControllerGroup _liftRgroup = new SpeedControllerGroup(liftController2);
+    private SpeedControllerGroup _liftLgroup =  new SpeedControllerGroup(liftController1,liftController3);
+    private SpeedControllerGroup _liftRgroup = new SpeedControllerGroup(liftController2,liftController4);
 
     public enum State
     {

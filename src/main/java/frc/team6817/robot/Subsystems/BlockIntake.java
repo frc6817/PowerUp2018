@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import static frc.team6817.robot.RobotMap.lIntakeController;
+import static frc.team6817.robot.RobotMap.mIntakeController;
 import static frc.team6817.robot.RobotMap.rIntakeController;
 
 
@@ -12,7 +13,10 @@ public class BlockIntake extends Subsystem
 {
     private SpeedControllerGroup _leftController = new SpeedControllerGroup(lIntakeController);
     private SpeedControllerGroup _rightController = new SpeedControllerGroup(rIntakeController);
+    private SpeedControllerGroup _midController = new SpeedControllerGroup(mIntakeController);
 
+    private static final double fullPower = 1.0;
+    private static final double fullRevPower = -1.0;
 
     /**
      * States of the block intake
@@ -49,13 +53,15 @@ public class BlockIntake extends Subsystem
         switch(STATE)
         {
             case IN:
-                _leftController.set(1.0);
-                _rightController.set(1.0);
+                _leftController.set(fullPower);
+                _rightController.set(fullPower);
+                _midController.set(fullPower);
                 break;
 
             case OUT:
-                _leftController.set(-1.0);
-                _rightController.set(-1.0);
+                _leftController.set(fullRevPower);
+                _rightController.set(fullRevPower);
+                _midController.set(fullRevPower);
                 break;
 
             case STOP:
@@ -72,5 +78,6 @@ public class BlockIntake extends Subsystem
     {
         _leftController.stopMotor();
         _rightController.stopMotor();
+        _midController.stopMotor();
     }
 }
