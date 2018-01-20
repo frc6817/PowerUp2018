@@ -2,6 +2,7 @@ package frc.team6817.robot;
 
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -14,6 +15,7 @@ import frc.team6817.robot.Autonomous.TestAuto;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
 import frc.team6817.robot.Subsystems.Lift;
+import sun.nio.ch.Net;
 
 
 /**
@@ -49,7 +51,11 @@ public class Robot extends TimedRobot
 
         CameraManager.start();
 
-        TableServer.testRun();
+        TableServer.init();
+
+        TableServer tableServer = new TableServer();
+
+        tableServer.start();
     }
 
 
@@ -139,7 +145,8 @@ public class Robot extends TimedRobot
         if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) > TRIGGERBUFFER)
         {
             lift.setState(Lift.State.UP,_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) );
-        }else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft)> TRIGGERBUFFER)
+        }
+        else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft)> TRIGGERBUFFER)
         {
             lift.setState(Lift.State.DOWN,_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft));
         }
@@ -166,8 +173,6 @@ public class Robot extends TimedRobot
         {
             blockIntake.setState(BlockIntake.State.STOP);
         }
-
-
     }
 
 
