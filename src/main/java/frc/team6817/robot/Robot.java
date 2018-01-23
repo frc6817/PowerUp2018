@@ -2,6 +2,7 @@ package frc.team6817.robot;
 
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -42,6 +43,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
+        CameraServer.getInstance().startAutomaticCapture();
         _oi = new OI(0 , 1);
 
         _autoChooser.addDefault("Baseline Auto" , new AutoLine());
