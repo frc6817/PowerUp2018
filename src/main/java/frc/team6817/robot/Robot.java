@@ -1,21 +1,13 @@
 package frc.team6817.robot;
 
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team6817.robot.Autonomous.AutoLine;
 import frc.team6817.robot.Autonomous.FMSReader;
-import frc.team6817.robot.Autonomous.TestAuto;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
 import frc.team6817.robot.Subsystems.Lift;
-import sun.nio.ch.Net;
 
 
 /**
@@ -36,8 +28,6 @@ public class Robot extends TimedRobot
 
     private static OI _oi;
 
-    private SendableChooser<String> _autoChooser = new SendableChooser<>();
-
 
     /**
      * Initializes controls and adds autonomous chooser element to the SmartDashboard. Also starts the camera server.
@@ -47,14 +37,10 @@ public class Robot extends TimedRobot
     {
         _oi = new OI(0 , 1);
 
-//        _autoChooser.addDefault();
-
         CameraManager.start();
 
         TableServer.init();
-
         TableServer tableServer = new TableServer();
-
         tableServer.start();
     }
 
@@ -72,25 +58,8 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        Command auto;
-
-        String autoSelected = SmartDashboard.getString("Auto Selector" , "AutoLine");
-
-        switch(autoSelected)
-        {
-            case "AutoLine":
-                auto = new AutoLine();
-                break;
-
-            default:
-                auto = null;
-                break;
-        }
-
-        if(auto != null)
-        {
-            auto.start();
-        }
+        // There's going to be a physical switch that controls which auto to run
+        // That code goes here.
     }
 
 
