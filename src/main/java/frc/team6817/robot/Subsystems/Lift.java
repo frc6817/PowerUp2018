@@ -31,18 +31,18 @@ public class Lift extends Subsystem {
      *
      * @param STATE State to set the Lift to thingies
      */
-    public void setState(final State STATE, final double Speed)
+    public void setState(final State STATE, final double SPEED)
     {
         switch(STATE)
         {
             case UP:
-                _liftLgroup.set(Speed);
-                _liftRgroup.set(Speed);
+                _liftLgroup.set(SPEED);
+                _liftRgroup.set(SPEED);
                 break;
 
             case DOWN:
-                _liftLgroup.set(-Speed);
-                _liftRgroup.set(-Speed);
+                _liftLgroup.set(-SPEED);
+                _liftRgroup.set(-SPEED);
                 break;
 
             case STOP:
@@ -53,7 +53,7 @@ public class Lift extends Subsystem {
     /**
      * Stops the Lift motors
      */
-    public void stop()
+    private void stop()
     {
         _liftLgroup.stopMotor();
         _liftRgroup.stopMotor();

@@ -25,8 +25,8 @@ public class RobotMap
     public static final Victor mIntakeController = new Victor(6);
 
     //Lift Controllers
-    public static final Talon liftController1 = new Talon(8);
-    public static final Talon liftController2 = new Talon(9);
-    public static final Talon liftController3 = new Talon(10);
-    public static final Talon liftController4 = new Talon(11);
+    public static final Talon liftController1 = new Talon(7);
+    public static final Talon liftController2 = new Talon(8);
+    public static final Talon liftController3 = new Talon(9);
+    public static final Talon liftController4 = new Talon(10);
 }

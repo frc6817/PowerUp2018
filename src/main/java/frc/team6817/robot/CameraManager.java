@@ -5,6 +5,7 @@ import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -31,6 +32,7 @@ public class CameraManager
         _rearCamera = CameraServer.getInstance().startAutomaticCapture(1);
         _server = CameraServer.getInstance().getServer();
 
+
         // Set up sinks to keep cameras open and avoid switch delay
         CvSink frontSink = new CvSink("Front Camera");
         frontSink.setSource(_frontCamera);
@@ -53,6 +55,7 @@ public class CameraManager
         if(_seeFrontCamera)
         {
             _server.setSource(_rearCamera);
+
         }
         else
         {

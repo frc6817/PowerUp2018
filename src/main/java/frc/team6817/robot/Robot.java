@@ -2,6 +2,7 @@ package frc.team6817.robot;
 
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import frc.team6817.robot.Autonomous.FMSReader;
@@ -35,6 +36,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
+        CameraServer.getInstance().startAutomaticCapture();
         _oi = new OI(0 , 1);
 
         CameraManager.start();
