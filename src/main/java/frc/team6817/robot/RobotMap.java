@@ -1,9 +1,11 @@
 package frc.team6817.robot;
 
 
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 
 
 /**
@@ -29,4 +31,7 @@ public class RobotMap
     public static final Talon liftController2 = new Talon(8);
     public static final Talon liftController3 = new Talon(9);
     public static final Talon liftController4 = new Talon(10);
+
+    // NavX
+    public static final AHRS navx = new AHRS(SPI.Port.kMXP);
 }

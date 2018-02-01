@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
@@ -75,6 +76,8 @@ public class Robot extends TimedRobot
                 myAuto.cancel();
             }
          */
+
+        RobotMap.navx.zeroYaw();
     }
 
 
@@ -150,6 +153,11 @@ public class Robot extends TimedRobot
         {
             blockIntake.setState(BlockIntake.State.STOP);
         }
+
+
+        SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());
+        SmartDashboard.putNumber("Pitch" , RobotMap.navx.getPitch());
+        SmartDashboard.putNumber("Roll" , RobotMap.navx.getRoll());
     }
 
 
