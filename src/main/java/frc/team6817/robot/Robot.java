@@ -158,6 +158,9 @@ public class Robot extends TimedRobot
         SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());
         SmartDashboard.putNumber("Pitch" , RobotMap.navx.getPitch());
         SmartDashboard.putNumber("Roll" , RobotMap.navx.getRoll());
+
+//        SmartDashboard.putString("Location" , CameraManager.networkTable().getSubTable("usb:0").getEntry("streams").toString());
+//        SmartDashboard.putString("Source" , CameraManager.networkTable().getEntry("source").toString());
     }
 
 
