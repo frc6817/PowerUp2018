@@ -2,7 +2,6 @@ package frc.team6817.robot;
 
 
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,6 +39,7 @@ public class Robot extends TimedRobot
     {
         CameraServer.getInstance().startAutomaticCapture();
         OI.setPorts(0 , 1);
+        OI.init();
 
         CameraManager.start();
 
@@ -109,22 +109,17 @@ public class Robot extends TimedRobot
     /**
      * Called periodically in teleOp- runs the scheduler
      *
-     * Also handles controls not defined as commands (ex. Camera Switching)
+     * Does NOT handle command execution- that goes in OI.java
      */
     @Override
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
 
-        if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
-         {
-            CameraManager.switchCameras();
-        }
-
-        if(_oi.controller1().getAButtonPressed())
-        {
-            drivetrain.toggleSlow();
-        }
+//        if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
+//        {
+//            CameraManager.switchCameras();
+//        }
 
 
         SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());

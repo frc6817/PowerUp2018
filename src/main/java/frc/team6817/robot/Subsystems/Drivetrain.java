@@ -1,11 +1,10 @@
 package frc.team6817.robot.Subsystems;
 
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import frc.team6817.robot.OI;
+import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
 
 import static frc.team6817.robot.RobotMap.*;
 
@@ -33,10 +32,7 @@ public class Drivetrain extends Subsystem
     @Override
     protected void initDefaultCommand()
     {
-        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft);
-        double rightX = OI.controller1().getX(GenericHID.Hand.kRight);
-
-        drive.curvatureDrive(leftY , rightX , leftY < .05);
+        setDefaultCommand(new StandardDrive());
     }
 
 
