@@ -16,8 +16,28 @@ public class OI
     private static XboxController _controller1;
     private static XboxController _controller2;
 
-    // Buttons
+    // Buttons, 1 at the end denotes controller 1, 2 denotes controller 2
     private static Button a1;
+    private static Button b1;
+    private static Button x1;
+    private static Button y1;
+    private static Button lBumper1;
+    private static Button rBumper1;
+    private static Button back1;
+    private static Button start1;
+    private static Button lStick1;
+    private static Button rStick1;
+
+    private static Button a2;
+    private static Button b2;
+    private static Button x2;
+    private static Button y2;
+    private static Button lBumper2;
+    private static Button rBumper2;
+    private static Button back2;
+    private static Button start2;
+    private static Button lStick2;
+    private static Button rStick2;
 
 
     /**
@@ -30,6 +50,27 @@ public class OI
         _controller2 = new XboxController(PORT2);
 
         a1 = new JoystickButton(_controller1 , 1);
+        b1 = new JoystickButton(_controller1 , 2);
+        x1 = new JoystickButton(_controller1 , 3);
+        y1 = new JoystickButton(_controller1 , 4);
+        lBumper1 = new JoystickButton(_controller1 , 5);
+        rBumper1 = new JoystickButton(_controller1 , 6);
+        back1 = new JoystickButton(_controller1 , 7);
+        start1 = new JoystickButton(_controller1 , 8);
+        lStick1 = new JoystickButton(_controller1 , 9);
+        rStick1 = new JoystickButton(_controller1 , 10);
+
+        a2 = new JoystickButton(_controller2 , 1);
+        b2 = new JoystickButton(_controller2 , 2);
+        x2 = new JoystickButton(_controller2 , 3);
+        y2 = new JoystickButton(_controller2 , 4);
+        lBumper2 = new JoystickButton(_controller2 , 5);
+        rBumper2 = new JoystickButton(_controller2 , 6);
+        back2 = new JoystickButton(_controller2 , 7);
+        start2 = new JoystickButton(_controller2 , 8);
+        lStick2 = new JoystickButton(_controller2 , 9);
+        rStick2 = new JoystickButton(_controller2 , 10);
+
     }
 
 
@@ -38,7 +79,7 @@ public class OI
      */
     static void init()
     {
-        a1.toggleWhenPressed(new PrecisionDrive());
+        lStick1.toggleWhenPressed(new PrecisionDrive());
     }
 
 
