@@ -38,8 +38,7 @@ public class Robot extends TimedRobot
     public void robotInit()
     {
         CameraServer.getInstance().startAutomaticCapture();
-        OI.setPorts(0 , 1);
-        OI.init();
+        OI.init(0 , 1);
 
         CameraManager.start();
 

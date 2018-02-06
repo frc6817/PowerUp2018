@@ -10,6 +10,7 @@ import frc.team6817.robot.Commands.Drivetrain.PrecisionDrive;
 /**
  * For binding controls to robot commands
  */
+@SuppressWarnings({"FieldCanBeLocal", "unused"})
 public class OI
 {
     // Controllers
@@ -44,10 +45,11 @@ public class OI
      * Sets the controller ports
      */
     @SuppressWarnings("SameParameterValue")
-    static void setPorts(final int PORT1 , final int PORT2)
+    static void init(final int PORT1 , final int PORT2)
     {
         _controller1 = new XboxController(PORT1);
         _controller2 = new XboxController(PORT2);
+
 
         a1 = new JoystickButton(_controller1 , 1);
         b1 = new JoystickButton(_controller1 , 2);
@@ -71,14 +73,8 @@ public class OI
         lStick2 = new JoystickButton(_controller2 , 9);
         rStick2 = new JoystickButton(_controller2 , 10);
 
-    }
 
-
-    /**
-     * Initializes the OI class and controller mappings- be sure to call this when the robot initializes
-     */
-    static void init()
-    {
+        // Tie buttons to commands
         lStick1.toggleWhenPressed(new PrecisionDrive());
     }
 
