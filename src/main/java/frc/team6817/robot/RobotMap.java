@@ -24,7 +24,6 @@ public class RobotMap
     // Block Intake controllers
     public static final Victor lIntakeController = new Victor(4);
     public static final Victor rIntakeController = new Victor(5);
-    public static final Victor mIntakeController = new Victor(6);
 
     //Flip Controller
     public static final Talon flipController1 = new Talon(7);

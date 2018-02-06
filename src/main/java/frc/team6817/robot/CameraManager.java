@@ -1,11 +1,10 @@
 package frc.team6817.robot;
 
 
-import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.cscore.VideoSink;
+import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.CameraServer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -21,6 +20,8 @@ public class CameraManager
 
     private static boolean _seeFrontCamera = true;
 
+    private static NetworkTable _table;
+
 
     /**
      * Starts the camera manager- sets up USB cameras and dummy sinks to keep both running so that switch delay is
@@ -28,21 +29,34 @@ public class CameraManager
      */
     public static void start()
     {
-        _frontCamera = CameraServer.getInstance().startAutomaticCapture(0);
-        _rearCamera = CameraServer.getInstance().startAutomaticCapture(1);
-        _server = CameraServer.getInstance().getServer();
+
+        CameraServer.getInstance().startAutomaticCapture("front camera" , 1);
+
+//        CameraServer.getInstance().startAutomaticCapture("front camera" , 0);
+//        _rearCamera = CameraServer.getInstance().startAutomaticCapture(1);
+//        _server = CameraServer.getInstance().getServer();
+
+//        _frontCamera.setResolution(250 , 250);
+//        _frontCamera.setFPS(10);
+//        _rearCamera.setResolution(250 , 250);
 
 
         // Set up sinks to keep cameras open and avoid switch delay
-        CvSink frontSink = new CvSink("Front Camera");
-        frontSink.setSource(_frontCamera);
-        frontSink.setEnabled(true);
+//        CvSink frontSink = new CvSink("Front Camera");
+//        frontSink.setSource(_frontCamera);
+//        frontSink.setEnabled(true);
 
-        CvSink rearSink = new CvSink("Rear Camera");
-        rearSink.setSource(_rearCamera);
-        rearSink.setEnabled(true);
+//        CvSink rearSink = new CvSink("Rear Camera");
+//        rearSink.setSource(_rearCamera);
+//        rearSink.setEnabled(true);
 
-        _server.setSource(_frontCamera);
+//        _server.setSource(_frontCamera);
+
+//        NetworkTableInstance instance = NetworkTableInstance.getDefault();
+//        instance.setServer("10.68.17.2");
+//        instance.startServer();
+
+//        _table = instance.getTable("/CameraPublisher");
     }
 
 
@@ -63,5 +77,14 @@ public class CameraManager
         }
 
         _seeFrontCamera = !_seeFrontCamera;
+    }
+
+
+    /**
+     * @return The Network table the camera server is working with
+     */
+    public static NetworkTable networkTable()
+    {
+        return _table;
     }
 }
