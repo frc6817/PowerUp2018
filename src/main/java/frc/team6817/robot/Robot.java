@@ -127,20 +127,6 @@ public class Robot extends TimedRobot
         }
 
 
-        if(_oi.controller2().getBumper(GenericHID.Hand.kRight))
-        {
-            blockIntake.setState(BlockIntake.State.IN);
-        }
-        else if(_oi.controller2().getBumper(GenericHID.Hand.kLeft))
-        {
-            blockIntake.setState(BlockIntake.State.IN);
-        }
-        else
-        {
-            blockIntake.setState(BlockIntake.State.STOP);
-        }
-
-
         SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());
         SmartDashboard.putNumber("Pitch" , RobotMap.navx.getPitch());
         SmartDashboard.putNumber("Roll" , RobotMap.navx.getRoll());

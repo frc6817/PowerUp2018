@@ -1,8 +1,10 @@
 package frc.team6817.robot.Subsystems;
 
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.team6817.robot.OI;
 
 import static frc.team6817.robot.RobotMap.lIntakeController;
 import static frc.team6817.robot.RobotMap.rIntakeController;
@@ -32,12 +34,25 @@ public class BlockIntake extends Subsystem
 
 
     /**
-     * Default command of the intake wheels
+     * Default command of the intake wheels- right bumper spins the wheels inward, left bumper spins the wheels
+     * outward. When neither button is pressed, the intake wheels do not move. In the event that both are pressed,
+     * intake holds priority
      */
     @Override
     protected void initDefaultCommand()
     {
-        // Nothing :)
+        if(OI.controller2().getBumper(GenericHID.Hand.kRight))
+        {
+            setState(BlockIntake.State.IN);
+        }
+        else if(OI.controller2().getBumper(GenericHID.Hand.kLeft))
+        {
+            setState(BlockIntake.State.IN);
+        }
+        else
+        {
+            setState(BlockIntake.State.STOP);
+        }
     }
 
 
