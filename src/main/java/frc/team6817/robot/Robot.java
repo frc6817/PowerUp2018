@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
+import frc.team6817.robot.Subsystems.Flip;
+import frc.team6817.robot.Subsystems.TapeMeasure;
 
 
 /**
@@ -23,9 +25,11 @@ public class Robot extends TimedRobot
 {
 
     final double TRIGGERBUFFER = .1;
+
     public static final Drivetrain drivetrain = new Drivetrain();
-    public static final Lift lift = new Lift();
     public static final BlockIntake blockIntake = new BlockIntake();
+    public static final Flip flip = new Flip();
+    public static final TapeMeasure tapeMeasure = new TapeMeasure();
 
 
     /**

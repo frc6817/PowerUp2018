@@ -4,6 +4,7 @@ package frc.team6817.robot;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 
 
@@ -23,6 +24,18 @@ public class RobotMap
     // Block Intake controllers
     public static final Victor lIntakeController = new Victor(4);
     public static final Victor rIntakeController = new Victor(5);
+
+
+    //Flip Controller
+    public static final Talon flipController1 = new Talon(7);
+
+
+    //Tape Measure Controller
+    public static final Talon tapeController = new Talon (8);
+
+
+    //Winch Controller
+    public static final Talon winchController = new Talon(9);
 
 
     // NavX
