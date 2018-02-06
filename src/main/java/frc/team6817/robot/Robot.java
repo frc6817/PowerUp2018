@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
-import frc.team6817.robot.Subsystems.Lift;
+import frc.team6817.robot.Subsystems.Flip;
+import frc.team6817.robot.Subsystems.TapeMeasure;
 
 
 /**
@@ -25,9 +26,9 @@ public class Robot extends TimedRobot
 
     final double TRIGGERBUFFER = .1;
     public static final Drivetrain drivetrain = new Drivetrain();
-    public static final Lift lift = new Lift();
     public static final BlockIntake blockIntake = new BlockIntake();
-
+    public static final Flip flip = new Flip();
+    public static final TapeMeasure tapeMeasure = new TapeMeasure();
     private static OI _oi;
 
 
@@ -122,19 +123,6 @@ public class Robot extends TimedRobot
             CameraManager.switchCameras();
         }
 
-        if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) > TRIGGERBUFFER)
-        {
-            lift.setState(Lift.State.UP,_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) );
-        }
-        else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft)> TRIGGERBUFFER)
-        {
-            lift.setState(Lift.State.DOWN,_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft));
-        }
-        else
-        {
-            lift.setState(Lift.State.STOP, 0);
-        }
-
         if(_oi.controller1().getAButtonPressed())
         {
             drivetrain.toggleSlow();
@@ -154,6 +142,40 @@ public class Robot extends TimedRobot
             blockIntake.setState(BlockIntake.State.STOP);
         }
 
+
+
+        if(_oi.controller2().getBButtonPressed())
+        {
+            flip.setState(Flip.State.FLIPENC);
+            flip.setState(Flip.State.UNFLIPENC);
+            flip.setState(Flip.State.STOP);
+        }
+        else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) > .20)
+        {
+            flip.setState(Flip.State.FLIP);
+        }
+        else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft)>.20)
+        {
+            flip.setState(Flip.State.UNFLIP);
+        }
+        else
+        {
+            flip.setState(Flip.State.STOP);
+        }
+
+
+        if(_oi.controller1().getTriggerAxis(GenericHID.Hand.kRight) > .20)
+        {
+            tapeMeasure.setState(TapeMeasure.State.UNWIND);
+        }
+        else if(_oi.controller1().getTriggerAxis(GenericHID.Hand.kLeft) > .20)
+        {
+            tapeMeasure.setState(TapeMeasure.State.WIND);
+        }
+        else
+        {
+            tapeMeasure.setState(TapeMeasure.State.STOP);
+        }
 
         SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());
         SmartDashboard.putNumber("Pitch" , RobotMap.navx.getPitch());

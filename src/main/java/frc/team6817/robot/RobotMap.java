@@ -26,11 +26,14 @@ public class RobotMap
     public static final Victor rIntakeController = new Victor(5);
     public static final Victor mIntakeController = new Victor(6);
 
-    //Lift Controllers
-    public static final Talon liftController1 = new Talon(7);
-    public static final Talon liftController2 = new Talon(8);
-    public static final Talon liftController3 = new Talon(9);
-    public static final Talon liftController4 = new Talon(10);
+    //Flip Controller
+    public static final Talon flipController1 = new Talon(7);
+
+    //Tape Measure Controller
+    public static final Talon tapeController = new Talon (8);
+
+    //Winch Controller
+    public static final Talon winchController = new Talon(9);
 
     // NavX
     public static final AHRS navx = new AHRS(SPI.Port.kMXP);
