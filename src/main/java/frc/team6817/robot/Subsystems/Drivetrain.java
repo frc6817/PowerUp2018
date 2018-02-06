@@ -3,9 +3,9 @@ package frc.team6817.robot.Subsystems;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.team6817.robot.OI;
 
 import static frc.team6817.robot.RobotMap.*;
 
@@ -25,35 +25,16 @@ public class Drivetrain extends Subsystem
 
 
     /**
-     * Initializes the default command of the drivetrain. Currently, that is nothing
-     */
-    @Override
-    protected void initDefaultCommand()
-    {
-        // Nothing :)
-    }
-
-
-    /**
      * Drives the drivetrain in TeleOp using an automatic version of the Cheesy Drive. QuickTurn is run
      * when the forward/backward throttle is less than .05
      *
      * Skrrt skrrt.
-     *
-     * @param driver XBox controller that drives the drivetrain
      */
-    public void teleOpDrive(XboxController driver)
+    @Override
+    protected void initDefaultCommand()
     {
-        final double SLOW_MULTIPLIER = .5;
-
-        double leftY = driver.getY(GenericHID.Hand.kLeft);
-        double rightX = driver.getX(GenericHID.Hand.kRight);
-
-        if(_slowOn)
-        {
-            leftY *= SLOW_MULTIPLIER;
-            rightX *= SLOW_MULTIPLIER;
-        }
+        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft);
+        double rightX = OI.controller1().getX(GenericHID.Hand.kRight);
 
         drive.curvatureDrive(leftY , rightX , leftY < .05);
     }

@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
-import frc.team6817.robot.Subsystems.Lift;
 
 
 /**
@@ -28,8 +27,6 @@ public class Robot extends TimedRobot
     public static final Lift lift = new Lift();
     public static final BlockIntake blockIntake = new BlockIntake();
 
-    private static OI _oi;
-
 
     /**
      * Initializes controls and adds autonomous chooser element to the SmartDashboard. Also starts the camera server.
@@ -38,7 +35,7 @@ public class Robot extends TimedRobot
     public void robotInit()
     {
         CameraServer.getInstance().startAutomaticCapture();
-        _oi = new OI(0 , 1);
+        OI.setPorts(0 , 1);
 
         CameraManager.start();
 
@@ -115,24 +112,9 @@ public class Robot extends TimedRobot
     {
         Scheduler.getInstance().run();
 
-        drivetrain.teleOpDrive(_oi.controller1());
-
         if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
          {
             CameraManager.switchCameras();
-        }
-
-        if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) > TRIGGERBUFFER)
-        {
-            lift.setState(Lift.State.UP,_oi.controller2().getTriggerAxis(GenericHID.Hand.kRight) );
-        }
-        else if(_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft)> TRIGGERBUFFER)
-        {
-            lift.setState(Lift.State.DOWN,_oi.controller2().getTriggerAxis(GenericHID.Hand.kLeft));
-        }
-        else
-        {
-            lift.setState(Lift.State.STOP, 0);
         }
 
         if(_oi.controller1().getAButtonPressed())
