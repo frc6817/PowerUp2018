@@ -1,12 +1,8 @@
 package frc.team6817.robot.Subsystems;
 
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
-
-import static frc.team6817.robot.RobotMap.*;
 
 
 /**
@@ -15,10 +11,10 @@ import static frc.team6817.robot.RobotMap.*;
  */
 public class Drivetrain extends Subsystem
 {
-    private SpeedControllerGroup _lGroup = new SpeedControllerGroup(lfController, lrController);
-    private SpeedControllerGroup _rGroup = new SpeedControllerGroup(rfController, rrController);
+//    private SpeedControllerGroup _lGroup = new SpeedControllerGroup(frontLeftController, frontRightController);
+//    private SpeedControllerGroup _rGroup = new SpeedControllerGroup(backLeftController, backRightController);
 
-    public final DifferentialDrive drive = new DifferentialDrive(_lGroup , _rGroup);
+//    public final DifferentialDrive drive = new DifferentialDrive(_lGroup , _rGroup);
 
     private boolean _slowOn = false;
 
@@ -45,7 +41,7 @@ public class Drivetrain extends Subsystem
      */
     public void tankDrive(double leftPower , double rightPower , boolean scale)
     {
-        drive.tankDrive(leftPower, rightPower, scale);
+//        drive.tankDrive(leftPower, rightPower, scale);
     }
 
 
@@ -72,6 +68,6 @@ public class Drivetrain extends Subsystem
      */
     public void stop()
     {
-        drive.stopMotor();
+//        drive.stopMotor();
     }
 }

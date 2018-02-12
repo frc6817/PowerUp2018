@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
-import frc.team6817.robot.Subsystems.Flip;
-import frc.team6817.robot.Subsystems.TapeMeasure;
+import frc.team6817.robot.Subsystems.Flipper;
 
 
 /**
@@ -22,13 +21,9 @@ import frc.team6817.robot.Subsystems.TapeMeasure;
 @SuppressWarnings("WeakerAccess")
 public class Robot extends TimedRobot
 {
-
-    final double TRIGGERBUFFER = .1;
-
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final BlockIntake blockIntake = new BlockIntake();
-    public static final Flip flip = new Flip();
-    public static final TapeMeasure tapeMeasure = new TapeMeasure();
+    public static final Flipper flipper = new Flipper();
 
 
     /**
@@ -45,6 +40,9 @@ public class Robot extends TimedRobot
         TableServer.init();
         TableServer tableServer = new TableServer();
         tableServer.start();
+
+//        backLeftController.follow(frontLeftController);
+//        backRightController.follow(frontRightController);
     }
 
 

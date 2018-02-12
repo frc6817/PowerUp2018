@@ -1,11 +1,12 @@
 package frc.team6817.robot;
 
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
+
 
 
 /**
@@ -15,27 +16,23 @@ import edu.wpi.first.wpilibj.Victor;
 public class RobotMap
 {
     // Drivetrain controllers
-    public static final Spark lfController = new Spark(1);
-    public static final Spark lrController = new Spark(0);
-    public static final Spark rfController = new Spark(3);
-    public static final Spark rrController = new Spark(2);
+    public static final TalonSRX frontLeftController = new TalonSRX(0);
+    public static final TalonSRX frontRightController = new TalonSRX(1);
+    public static final VictorSP backLeftController = new VictorSP(0);
+    public static final VictorSP backRightController = new VictorSP(1);
 
 
     // Block Intake controllers
-    public static final Victor lIntakeController = new Victor(4);
-    public static final Victor rIntakeController = new Victor(5);
+    public static final Spark lIntakeController = new Spark(2);
+    public static final Spark rIntakeController = new Spark(3);
 
 
-    //Flip Controller
-    public static final Talon flipController1 = new Talon(7);
-
-
-    //Tape Measure Controller
-    public static final Talon tapeController = new Talon (8);
+    //Flipper Controller
+    public static final TalonSRX flipController = new TalonSRX(3);
 
 
     //Winch Controller
-    public static final Talon winchController = new Talon(9);
+    public static final Spark winchController = new Spark(4);
 
 
     // NavX
