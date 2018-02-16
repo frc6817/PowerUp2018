@@ -2,33 +2,36 @@ package frc.team6817.robot;
 
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.VictorSP;
-
 
 
 /**
- * For mapping sensors and actuator ports to a variable name
+ * For mapping sensors and actuator ports to a variable name. Also holds things such as sensors.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class RobotMap
 {
     // Drivetrain controllers
-    public static final TalonSRX frontLeftController = new TalonSRX(0);
+    public static final TalonSRX frontLeftController = new TalonSRX(2);
     public static final TalonSRX frontRightController = new TalonSRX(1);
-    public static final VictorSP backLeftController = new VictorSP(0);
-    public static final VictorSP backRightController = new VictorSP(1);
+    public static final VictorSPX backLeftController = new VictorSPX(0);
+    public static final VictorSPX backRightController = new VictorSPX(1);
 
 
     // Block Intake controllers
-    public static final Spark lIntakeController = new Spark(2);
-    public static final Spark rIntakeController = new Spark(3);
+    public static final Spark leftIntakeController = new Spark(0);
+    public static final Spark rightIntakeController = new Spark(1);
+
+    public static final Solenoid leftIntakePiston = new Solenoid(0);
+    public static final Solenoid rightIntakePiston = new Solenoid(1);
 
 
     //Flipper Controller
-    public static final TalonSRX flipController = new TalonSRX(3);
+    public static final TalonSRX flipController = new TalonSRX(0);
 
 
     //Winch Controller

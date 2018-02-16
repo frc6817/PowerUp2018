@@ -43,7 +43,7 @@ public class DriveForTime extends Command
         //noinspection StatementWithEmptyBody
         while(System.currentTimeMillis() - startTime < _time)
         {
-            drivetrain.tankDrive(-_leftPower , -_rightPower , false);
+//            drivetrain.tankDrive(-_leftPower , -_rightPower , false);
         }
 
         _finished = true;

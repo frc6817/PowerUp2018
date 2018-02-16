@@ -1,8 +1,11 @@
 package frc.team6817.robot.Subsystems;
 
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
+
+import static frc.team6817.robot.RobotMap.*;
 
 
 /**
@@ -11,12 +14,15 @@ import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
  */
 public class Drivetrain extends Subsystem
 {
-//    private SpeedControllerGroup _lGroup = new SpeedControllerGroup(frontLeftController, frontRightController);
-//    private SpeedControllerGroup _rGroup = new SpeedControllerGroup(backLeftController, backRightController);
-
-//    public final DifferentialDrive drive = new DifferentialDrive(_lGroup , _rGroup);
-
-    private boolean _slowOn = false;
+    /**
+     * Initializes drivetrain motor controllers. For the drivetrain, each side's Victor SPX follows its corresponding
+     * Talon SRX. Adjustments to the drivetrain should only be done through the Talon SRXs.
+     */
+    public Drivetrain()
+    {
+        backLeftController.follow(frontLeftController);
+        backRightController.follow(frontRightController);
+    }
 
 
     /**
@@ -33,41 +39,11 @@ public class Drivetrain extends Subsystem
 
 
     /**
-     * Drives the drivetrain given a leftPower and a rightPower. Runs tank drive configuration.
-     *
-     * @param leftPower Power to apply to the left side
-     * @param rightPower Power to apply to the right side
-     * @param scale Whether to scale power or not
-     */
-    public void tankDrive(double leftPower , double rightPower , boolean scale)
-    {
-//        drive.tankDrive(leftPower, rightPower, scale);
-    }
-
-
-    /**
-     * Toggles on or off slow mode (50% drivetrain power)
-     */
-    public void toggleSlow()
-    {
-        _slowOn = !_slowOn;
-    }
-
-
-    /**
-     * @return Whether the drivetrain is in slow mode or not
-     */
-    public boolean isSlow()
-    {
-        return _slowOn;
-    }
-
-
-    /**
      * Stops the drivetrain
      */
     public void stop()
     {
-//        drive.stopMotor();
+        frontLeftController.set(ControlMode.PercentOutput , 0);
+        frontRightController.set(ControlMode.PercentOutput , 0);
     }
 }

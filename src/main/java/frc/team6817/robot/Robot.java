@@ -10,6 +10,8 @@ import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
 import frc.team6817.robot.Subsystems.Flipper;
 
+import static frc.team6817.robot.RobotMap.leftIntakeController;
+
 
 /**
  * Main Robot class for Team 6817 POWER UP
@@ -24,6 +26,9 @@ public class Robot extends TimedRobot
     public static final Drivetrain drivetrain = new Drivetrain();
     public static final BlockIntake blockIntake = new BlockIntake();
     public static final Flipper flipper = new Flipper();
+
+
+    public static final DashServer dashServer = new DashServer(443);
 
 
     /**
@@ -41,8 +46,7 @@ public class Robot extends TimedRobot
         TableServer tableServer = new TableServer();
         tableServer.start();
 
-//        backLeftController.follow(frontLeftController);
-//        backRightController.follow(frontRightController);
+        dashServer.start();
     }
 
 
@@ -125,6 +129,21 @@ public class Robot extends TimedRobot
 
 //        SmartDashboard.putString("Location" , CameraManager.networkTable().getSubTable("usb:0").getEntry("streams").toString());
 //        SmartDashboard.putString("Source" , CameraManager.networkTable().getEntry("source").toString());
+
+
+
+        if(OI.controller1().getAButton())
+        {
+            leftIntakeController.set(0.5);
+        }
+        else if(OI.controller1().getBButton())
+        {
+            leftIntakeController.set(-0.5);
+        }
+        else
+        {
+            leftIntakeController.set(0.0);
+        }
     }
 
 

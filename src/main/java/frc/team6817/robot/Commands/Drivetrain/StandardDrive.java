@@ -9,7 +9,6 @@ import frc.team6817.robot.OI;
 
 import static frc.team6817.robot.Robot.drivetrain;
 import static frc.team6817.robot.RobotMap.frontLeftController;
-import static frc.team6817.robot.RobotMap.frontRightController;
 
 
 /**
@@ -41,7 +40,7 @@ public class StandardDrive extends Command
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight);
 
         frontLeftController.set(ControlMode.PercentOutput , leftY + rightX);
-        frontRightController.set(ControlMode.PercentOutput , leftY - rightX);
+//        frontRightController.set(ControlMode.PercentOutput , leftY - rightX);
 
         SmartDashboard.putString("Precision Drive" , "Off");
     }
