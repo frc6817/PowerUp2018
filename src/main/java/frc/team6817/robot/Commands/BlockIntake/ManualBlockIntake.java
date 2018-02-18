@@ -32,12 +32,10 @@ public class ManualBlockIntake extends Command
 
         if(OI.controller2().getBumperPressed(GenericHID.Hand.kRight))
         {
-            blockIntake.stop();
             new ActuateArms(false).execute();
         }
         else if(OI.controller2().getBumperPressed(GenericHID.Hand.kLeft))
         {
-            blockIntake.stop();
             new ActuateArms(true).execute();
         }
 
