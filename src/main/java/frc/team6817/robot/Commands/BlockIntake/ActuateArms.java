@@ -5,8 +5,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.team6817.robot.Robot.blockIntake;
 import static frc.team6817.robot.RobotMap.leftIntakePiston;
+import static frc.team6817.robot.RobotMap.rightIntakeController;
 import static frc.team6817.robot.RobotMap.rightIntakePiston;
-
 
 public class ActuateArms extends Command
 {

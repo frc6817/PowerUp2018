@@ -22,6 +22,10 @@ public class RobotMap
     public static final VictorSPX backLeftController = new VictorSPX(0);
     public static final VictorSPX backRightController = new VictorSPX(1);
 
+    //rev color sensor
+    public I2C blockSense = new I2C(I2C.Port.kOnboard, 0x29);
+
+
 
     // Block Intake controllers
     public static final Spark leftIntakeController = new Spark(0);
