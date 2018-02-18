@@ -5,7 +5,10 @@ import edu.wpi.first.wpilibj.command.PIDCommand;
 
 public class DriveToDistance extends PIDCommand
 {
-    private double _distance;
+    private final double COUNTS_PER_INCH = 2770.57;
+
+    private double _distance;           // This is the distance in ENCODER COUNTS
+
 
     /**
      * Initializes standard PID variables
@@ -14,7 +17,7 @@ public class DriveToDistance extends PIDCommand
     {
         super(2.0 , 0.0 , 0.0);
 
-        _distance = DISTANCE;
+        _distance = DISTANCE * COUNTS_PER_INCH;
     }
 
 

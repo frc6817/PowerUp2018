@@ -2,7 +2,7 @@ package frc.team6817.robot.Subsystems;
 
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
 
 import static frc.team6817.robot.RobotMap.*;
@@ -12,7 +12,7 @@ import static frc.team6817.robot.RobotMap.*;
  * Drivetrain subsystem of the Power Up robot. It is a 6-wheel drop center running 4 motors,
  * two on each side running the Cheesy Drive.
  */
-public class Drivetrain extends Subsystem
+public class Drivetrain extends PIDSubsystem
 {
     /**
      * Initializes drivetrain motor controllers. For the drivetrain, each side's Victor SPX follows its corresponding
@@ -20,6 +20,12 @@ public class Drivetrain extends Subsystem
      */
     public Drivetrain()
     {
+        super(2 , 0 , 0);
+
+        setAbsoluteTolerance(1_000);
+
+        getPIDController().setContinuous();
+
         backLeftController.follow(frontLeftController);
         backRightController.follow(frontRightController);
     }
@@ -45,5 +51,19 @@ public class Drivetrain extends Subsystem
     {
         frontLeftController.set(ControlMode.PercentOutput , 0);
         frontRightController.set(ControlMode.PercentOutput , 0);
+    }
+
+
+    @Override
+    protected double returnPIDInput()
+    {
+        return 0;
+    }
+
+
+    @Override
+    protected void usePIDOutput(double output)
+    {
+
     }
 }

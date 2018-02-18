@@ -4,6 +4,7 @@ package frc.team6817.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
@@ -36,6 +37,8 @@ public class RobotMap
 
     //Winch Controller
     public static final Spark winchController = new Spark(4);
+
+    public static final I2C blockSense = new I2C(I2C.Port.kOnboard, 0x29);
 
 
     // NavX
