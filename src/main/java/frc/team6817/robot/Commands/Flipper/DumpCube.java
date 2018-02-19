@@ -10,7 +10,7 @@ import static frc.team6817.robot.Robot.flipper;
 
 public class DumpCube extends CommandGroup
 {
-    public void DumpCube()
+    public DumpCube()
     {
         requires(flipper);
         requires(blockIntake);

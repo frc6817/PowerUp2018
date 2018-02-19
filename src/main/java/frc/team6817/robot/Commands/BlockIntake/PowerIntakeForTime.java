@@ -4,43 +4,49 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.team6817.robot.Robot.blockIntake;
 import static frc.team6817.robot.RobotMap.leftIntakeController;
-import static frc.team6817.robot.RobotMap.leftIntakePiston;
 import static frc.team6817.robot.RobotMap.rightIntakeController;
 
 
-public class AutoBlockIntake extends Command {
+public class PowerIntakeForTime extends Command
+{
     private long _time;
-    private final static double FLYPOWER = 1;
-    private boolean _finished = false;
+    private double _leftPower;
+    private double _rightPower;
+
+    private long _startTime;
 
 
     /**
      * Creates a Drive For Time command, requires the blockIntake
-     * <p>
+     *
      * Invokes superconstructor.
      *
      * @param LEFT_POWER  Power to set to the left side
      * @param RIGHT_POWER Power to set to the right side
      * @param TIME        Time to collect to in milliseconds
      */
-    public AutoBlockIntake(final double LEFT_POWER, final double RIGHT_POWER, final long TIME) {
+    public PowerIntakeForTime(final double LEFT_POWER, final double RIGHT_POWER, final long TIME)
+    {
         super();
 
         requires(blockIntake);
+
         _time = TIME;
+        _leftPower = LEFT_POWER;
+        _rightPower = RIGHT_POWER;
     }
+
+
     @Override
     public void execute()
     {
-        long startTime = System.currentTimeMillis();
+        _startTime = System.currentTimeMillis();
 
-        while(System.currentTimeMillis() - startTime < _time)
+        while(System.currentTimeMillis() - _startTime < _time)
         {
-            leftIntakeController.set(-FLYPOWER);
-            rightIntakeController.set(FLYPOWER);
+            leftIntakeController.set(_leftPower);
+            rightIntakeController.set(_rightPower);
         }
-
-        _finished = true;
     }
 
 
@@ -61,7 +67,7 @@ public class AutoBlockIntake extends Command {
     @Override
     protected boolean isFinished()
     {
-        return _finished;
+        return System.currentTimeMillis() - _startTime < _time;
     }
 }
 

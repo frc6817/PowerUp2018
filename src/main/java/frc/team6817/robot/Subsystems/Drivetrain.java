@@ -37,8 +37,6 @@ public class Drivetrain extends Subsystem
      * Drives the drivetrain in TeleOp using an automatic version of the Cheesy Drive. QuickTurn is run
      * when the forward/backward throttle is less than .05
      *
-     * Kassi is the beast :) also a penguin
-     *
      * BUY YOUR SHIRTS AND HOODIES HAHAHAHAHAHAHA
      *
      * Skrrt skrrt.
