@@ -16,8 +16,8 @@ public class BlockIntake extends Subsystem
      * intake holds priority.
      *
      * Bumpers control arm actuation. The right bumper shuts off both pistons and brings the arms inward.
-     * The left bumper turns on both pistons and pushes the arms outward. Note that actuation of the arms stops the
-     * intake wheels. Also note that if the arms are retracted inward, the flipper will not move.
+     * The left bumper turns on both pistons and pushes the arms outward. Note that if the arms are retracted inward,
+     * the flipper will not move.
      */
     @Override
     protected void initDefaultCommand()

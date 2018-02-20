@@ -4,7 +4,6 @@ package frc.team6817.robot.Subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
 
 import static frc.team6817.robot.RobotMap.*;
@@ -16,6 +15,10 @@ import static frc.team6817.robot.RobotMap.*;
  */
 public class Drivetrain extends Subsystem
 {
+    private long _leftOffset = 0;
+    private long _rightOffset = 0;
+
+
     /**
      * Initializes drivetrain motor controllers. For the drivetrain, each side's Victor SPX follows its corresponding
      * Talon SRX. Adjustments to the drivetrain should only be done through the Talon SRXs.
@@ -28,8 +31,26 @@ public class Drivetrain extends Subsystem
         frontLeftController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
         frontRightController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
 
-        SmartDashboard.putNumber("Left Encoder" , frontLeftController.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("Right Encoder" , frontRightController.getSensorCollection().getQuadraturePosition());
+        resetEncoders();
+    }
+
+
+    public long leftQuadPos()
+    {
+        return -(frontLeftController.getSelectedSensorPosition(0) - _leftOffset);
+    }
+
+
+    public long rightQuadPos()
+    {
+        return frontRightController.getSelectedSensorPosition(0) - _rightOffset;
+    }
+
+
+    public void resetEncoders()
+    {
+        _leftOffset = frontLeftController.getSelectedSensorPosition(0);
+        _rightOffset = frontRightController.getSelectedSensorPosition(0);
     }
 
 

@@ -12,6 +12,9 @@ import static frc.team6817.robot.RobotMap.flipController;
 
 public class ManualFlip extends Command
 {
+    private final double _MULTIPLIER = .60;
+
+
     public ManualFlip()
     {
         super();
@@ -25,7 +28,7 @@ public class ManualFlip extends Command
     {
         double powerLevel = OI.controller2().getY(GenericHID.Hand.kRight);
 
-        flipController.set(ControlMode.PercentOutput , powerLevel);
+        flipController.set(ControlMode.PercentOutput , powerLevel * _MULTIPLIER);
     }
 
 

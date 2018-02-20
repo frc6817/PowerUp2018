@@ -3,14 +3,14 @@ package frc.team6817.robot;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
+import frc.team6817.robot.DashServer.DashServer;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
 import frc.team6817.robot.Subsystems.Flipper;
-
-import static frc.team6817.robot.RobotMap.leftIntakeController;
 
 
 /**
@@ -27,8 +27,9 @@ public class Robot extends TimedRobot
     public static final BlockIntake blockIntake = new BlockIntake();
     public static final Flipper flipper = new Flipper();
 
-
     public static final DashServer dashServer = new DashServer(443);
+
+    public static CommandGroup auto;
 
 
     /**
@@ -63,21 +64,21 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        // There's going to be a physical switch that controls which auto to run
-        // That code goes here.
+        if(auto != null)
+        {
+            auto.start();
+        }
     }
 
 
     @Override
     public void teleopInit()
     {
-        // Be sure to cancel the auto
-        /*
-            if(myAuto != null)
-            {
-                myAuto.cancel();
-            }
-         */
+        if(auto != null)
+        {
+            auto.cancel();
+        }
+
 
         RobotMap.navx.zeroYaw();
     }
@@ -117,33 +118,11 @@ public class Robot extends TimedRobot
     {
         Scheduler.getInstance().run();
 
-//        if(_oi.controller1().getBumperPressed(GenericHID.Hand.kRight))
-//        {
-//            CameraManager.switchCameras();
-//        }
-
+        SmartDashboard.putBoolean("Is Calibrating" , RobotMap.navx.isCalibrating());
 
         SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());
         SmartDashboard.putNumber("Pitch" , RobotMap.navx.getPitch());
         SmartDashboard.putNumber("Roll" , RobotMap.navx.getRoll());
-
-//        SmartDashboard.putString("Location" , CameraManager.networkTable().getSubTable("usb:0").getEntry("streams").toString());
-//        SmartDashboard.putString("Source" , CameraManager.networkTable().getEntry("source").toString());
-
-
-
-        if(OI.controller1().getAButton())
-        {
-            leftIntakeController.set(0.5);
-        }
-        else if(OI.controller1().getBButton())
-        {
-            leftIntakeController.set(-0.5);
-        }
-        else
-        {
-            leftIntakeController.set(0.0);
-        }
     }
 
 

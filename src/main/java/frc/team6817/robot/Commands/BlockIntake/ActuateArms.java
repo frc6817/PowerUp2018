@@ -1,11 +1,11 @@
 package frc.team6817.robot.Commands.BlockIntake;
 
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.team6817.robot.Robot.blockIntake;
-import static frc.team6817.robot.RobotMap.leftIntakePiston;
-import static frc.team6817.robot.RobotMap.rightIntakePiston;
+import static frc.team6817.robot.RobotMap.dualIntake;
 
 
 public class ActuateArms extends Command
@@ -26,8 +26,14 @@ public class ActuateArms extends Command
     @Override
     public void execute()
     {
-        leftIntakePiston.set(_actuateOutward);
-        rightIntakePiston.set(_actuateOutward);
+        if(_actuateOutward)
+        {
+            dualIntake.set(DoubleSolenoid.Value.kForward);
+        }
+        else
+        {
+            dualIntake.set(DoubleSolenoid.Value.kReverse);
+        }
     }
 
 
@@ -48,6 +54,7 @@ public class ActuateArms extends Command
     @Override
     protected boolean isFinished()
     {
-        return leftIntakePiston.get() == _actuateOutward && rightIntakePiston.get() == _actuateOutward;
+        return (dualIntake.get() == DoubleSolenoid.Value.kForward && _actuateOutward)
+                || (dualIntake.get() == DoubleSolenoid.Value.kReverse && !_actuateOutward);
     }
 }

@@ -21,6 +21,8 @@ public class Flipper extends PIDSubsystem
         flipController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
 
         setAbsoluteTolerance(2 * COUNTS_PER_DEGREE);
+        setInputRange(-9_999_999 , 9_999_999);          // Hecka large numbers xd
+        setOutputRange(-1 , 1);
         getPIDController().setContinuous();
     }
 

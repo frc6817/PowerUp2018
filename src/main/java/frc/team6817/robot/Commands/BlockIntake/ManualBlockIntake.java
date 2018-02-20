@@ -12,6 +12,9 @@ import static frc.team6817.robot.RobotMap.rightIntakeController;
 
 public class ManualBlockIntake extends Command
 {
+    private final double _MULTIPLIER = .5;
+
+
     public ManualBlockIntake()
     {
         super();
@@ -30,17 +33,17 @@ public class ManualBlockIntake extends Command
             intakePower = OI.controller2().getTriggerAxis(GenericHID.Hand.kRight);
         }
 
-        if(OI.controller2().getBumperPressed(GenericHID.Hand.kRight))
+        if(OI.controller2().getBumperPressed(GenericHID.Hand.kLeft))
         {
             new ActuateArms(false).execute();
         }
-        else if(OI.controller2().getBumperPressed(GenericHID.Hand.kLeft))
+        else if(OI.controller2().getBumperPressed(GenericHID.Hand.kRight))
         {
             new ActuateArms(true).execute();
         }
 
-        leftIntakeController.set(intakePower);
-        rightIntakeController.set(intakePower);
+        leftIntakeController.set(intakePower * _MULTIPLIER);
+        rightIntakeController.set(-intakePower * _MULTIPLIER);
     }
 
 

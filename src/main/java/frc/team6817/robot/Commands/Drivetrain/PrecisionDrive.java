@@ -18,6 +18,9 @@ import static frc.team6817.robot.RobotMap.frontRightController;
  */
 public class PrecisionDrive extends Command
 {
+    public static double DRIVE_MULTIPLIER = .5;
+
+
     /**
      * Creates a PrevisionDrive command- invokes supercontructor
      */
@@ -35,16 +38,11 @@ public class PrecisionDrive extends Command
     @Override
     public void execute()
     {
-        final double speedMultiplier = .5;
+        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * DRIVE_MULTIPLIER;
+        double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * DRIVE_MULTIPLIER;
 
-        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * speedMultiplier;
-        double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * speedMultiplier;
-
-
-        frontLeftController.set(ControlMode.PercentOutput , leftY + rightX);
-        frontRightController.set(ControlMode.PercentOutput , leftY - rightX);
-
-//        drivetrain.drive.curvatureDrive(leftY , rightX , leftY < .05);
+        frontLeftController.set(ControlMode.PercentOutput , -(leftY - rightX));
+        frontRightController.set(ControlMode.PercentOutput , leftY + rightX);
 
         SmartDashboard.putString("Precision Drive" , "On");
     }
