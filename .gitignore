@@ -16,6 +16,8 @@ out/
 
 .classpath
 
+QDashBuild
+
 build/
 gradle/
 temp/
