@@ -1,0 +1,3 @@
+[submodule "QDash"]
+	path = QDash
+	url = https://github.com/frc6817/QDash
