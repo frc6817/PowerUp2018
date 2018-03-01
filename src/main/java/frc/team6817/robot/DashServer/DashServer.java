@@ -1,6 +1,8 @@
 package frc.team6817.robot.DashServer;
 
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,6 +20,9 @@ public class DashServer extends Thread
     private ServerSocket _serverSocket;
 
     private ArrayList<String> _messageList = new ArrayList<>();
+
+    private Socket _server;
+    private DataOutputStream _outStream;
 
 
     public DashServer(final int PORT)
@@ -37,31 +42,45 @@ public class DashServer extends Thread
     public void run()
     {
         String inputData;
+        StringBuilder finalMessage = new StringBuilder();
 
-        DataOutputStream outStream;
+        if(_serverSocket.isClosed())
+        {
+            try
+            {
+                _server = _serverSocket.accept();
+                SmartDashboard.putString("Socket" , "Accept");
+                _outStream = new DataOutputStream(_server.getOutputStream());
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
 
 
         try
         {
-            Socket server = _serverSocket.accept();
-            inputData = new DataInputStream(server.getInputStream()).readUTF();
-            outStream = new DataOutputStream(server.getOutputStream());
-
-            String finalMessage = "";
-
             //noinspection InfiniteLoopStatement
             for(;;)
             {
+                inputData = new DataInputStream(_server.getInputStream()).readUTF();
+
                 Parser.parseData(inputData);
 
-                for(String i: _messageList)
+                SmartDashboard.putString("Input" , "Got it");
+
+                for (String i : _messageList)
                 {
-                    finalMessage += i;
+                    finalMessage.append(i);
                 }
                 _messageList.clear();
-                outStream.writeUTF(finalMessage);
 
-                Thread.sleep(200);
+                _outStream.writeUTF(finalMessage.toString());
+
+                SmartDashboard.putString("Sending this data" , finalMessage.toString());
+
+                finalMessage = new StringBuilder();
             }
         }
         catch(Exception e)
@@ -69,6 +88,7 @@ public class DashServer extends Thread
             e.printStackTrace();
         }
     }
+
 
 
     public void sendMessage(final String tag , final String message)

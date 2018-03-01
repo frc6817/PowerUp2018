@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.team6817.robot.Commands.Drivetrain.PrecisionDrive;
+import frc.team6817.robot.Commands.Drivetrain.RotateToDegree;
 
 
 /**
@@ -76,6 +77,8 @@ public class OI
 
         // Tie buttons to commands
         lStick1.toggleWhenPressed(new PrecisionDrive());
+
+        a1.whenPressed(new RotateToDegree(90));
     }
 
 

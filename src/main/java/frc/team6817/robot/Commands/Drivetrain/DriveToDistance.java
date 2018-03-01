@@ -12,8 +12,8 @@ import static frc.team6817.robot.RobotMap.frontRightController;
 @SuppressWarnings("FieldCanBeLocal")
 public class DriveToDistance extends PIDCommand
 {
-    private final double COUNTS_PER_INCH = 2770.57;
-    private final int TOLERANCE = 1_000;
+    private final double COUNTS_PER_INCH = 210.7;
+    private final int TOLERANCE = 100;
 
 
     /**

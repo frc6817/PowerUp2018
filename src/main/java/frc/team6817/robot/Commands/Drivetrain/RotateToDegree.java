@@ -17,11 +17,15 @@ public class RotateToDegree extends PIDCommand
 
     public RotateToDegree(final double DESTINATION)
     {
-        super(2 , 0 , 0 );
+        super(2 , 1 , .25 );
 
         requires(drivetrain);
 
         getPIDController().setAbsoluteTolerance(TOLERANCE);
+
+        setInputRange(-180 , 180);
+        getPIDController().setOutputRange(-1 , 1);
+
         getPIDController().setContinuous();
         setSetpoint(DESTINATION);
     }
@@ -30,21 +34,21 @@ public class RotateToDegree extends PIDCommand
     @Override
     protected double returnPIDInput()
     {
-        return RobotMap.navx.getPitch();
+        return RobotMap.navx.getYaw();
     }
 
 
     @Override
     protected void usePIDOutput(double output)
     {
+        frontLeftController.set(ControlMode.PercentOutput , output);        // Left is opposite
         frontRightController.set(ControlMode.PercentOutput , output);
-        frontLeftController.set(ControlMode.PercentOutput , -output);
     }
 
 
     @Override
     protected boolean isFinished()
     {
-        return Math.abs(RobotMap.navx.getPitch() - getSetpoint()) <= TOLERANCE;
+        return Math.abs(RobotMap.navx.getYaw() - getSetpoint()) <= TOLERANCE;
     }
 }

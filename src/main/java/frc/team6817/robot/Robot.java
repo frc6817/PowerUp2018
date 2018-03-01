@@ -27,7 +27,7 @@ public class Robot extends TimedRobot
     public static final BlockIntake blockIntake = new BlockIntake();
     public static final Flipper flipper = new Flipper();
 
-    public static final DashServer dashServer = new DashServer(443);
+    public static final DashServer dashServer = new DashServer(1560);
 
     public static CommandGroup auto;
 
@@ -117,6 +117,9 @@ public class Robot extends TimedRobot
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
+
+        dashServer.sendMessage("Test" , "Hello from the RoboRio!");
+
 
         SmartDashboard.putBoolean("Is Calibrating" , RobotMap.navx.isCalibrating());
 
