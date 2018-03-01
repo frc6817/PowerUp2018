@@ -1,41 +1,60 @@
 package frc.team6817.robot;
 
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.team6817.robot.Autonomous.AutoLine;
+import frc.team6817.robot.Autonomous.FMSReader;
+import frc.team6817.robot.DashServer.DashServer;
+import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
+import frc.team6817.robot.Subsystems.Flipper;
 
 
+/**
+ * Main Robot class for Team 6817 POWER UP
+ *
+ * Declare Subsystems here
+ *
+ * Robot modes (teleOp , auto , etc.) are defined and controller here
+ */
+@SuppressWarnings("WeakerAccess")
 public class Robot extends TimedRobot
 {
-    private static final Drivetrain _drivetrain = new Drivetrain();
+    public static final Drivetrain drivetrain = new Drivetrain();
+    public static final BlockIntake blockIntake = new BlockIntake();
+    public static final Flipper flipper = new Flipper();
 
-    private static OI _oi;
+    public static final DashServer dashServer = new DashServer(1560);
 
-    private SendableChooser<CommandGroup> _autoChooser = new SendableChooser<>();   // Auto chooser
+    public static CommandGroup auto;
 
 
     /**
-     * Initializes controls and adds autonomous chooser element to the SmartDashboard
+     * Initializes controls and adds autonomous chooser element to the SmartDashboard. Also starts the camera server.
      */
     @Override
     public void robotInit()
     {
-        _oi = new OI(0 , 1);
+        CameraServer.getInstance().startAutomaticCapture();
+        OI.init(0 , 1);
 
-        _autoChooser.addDefault("Baseline Auto" , new AutoLine());
-        SmartDashboard.putData("Auto mode" , _autoChooser);
+        CameraManager.start();
+
+        TableServer.init();
+        TableServer tableServer = new TableServer();
+        tableServer.start();
+
+        dashServer.start();
     }
 
 
     @Override
     public void disabledInit()
     {
-        _drivetrain.stop();
+        drivetrain.stop();
     }
 
 
@@ -45,8 +64,6 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        CommandGroup auto = _autoChooser.getSelected();
-
         if(auto != null)
         {
             auto.start();
@@ -57,7 +74,13 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit()
     {
+        if(auto != null)
+        {
+            auto.cancel();
+        }
 
+
+        RobotMap.navx.zeroYaw();
     }
 
 
@@ -71,7 +94,7 @@ public class Robot extends TimedRobot
     @Override
     public void disabledPeriodic()
     {
-
+        FMSReader.readFMS();
     }
 
 
@@ -87,13 +110,22 @@ public class Robot extends TimedRobot
 
     /**
      * Called periodically in teleOp- runs the scheduler
+     *
+     * Does NOT handle command execution- that goes in OI.java
      */
     @Override
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
 
-        _drivetrain.teleOpDrive(_oi.controller1());
+        dashServer.sendMessage("Test" , "Hello from the RoboRio!");
+
+
+        SmartDashboard.putBoolean("Is Calibrating" , RobotMap.navx.isCalibrating());
+
+        SmartDashboard.putNumber("Yaw" , RobotMap.navx.getYaw());
+        SmartDashboard.putNumber("Pitch" , RobotMap.navx.getPitch());
+        SmartDashboard.putNumber("Roll" , RobotMap.navx.getRoll());
     }
 
 

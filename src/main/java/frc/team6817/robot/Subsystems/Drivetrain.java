@@ -1,11 +1,10 @@
 package frc.team6817.robot.Subsystems;
 
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.XboxController;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
 
 import static frc.team6817.robot.RobotMap.*;
 
@@ -16,19 +15,42 @@ import static frc.team6817.robot.RobotMap.*;
  */
 public class Drivetrain extends Subsystem
 {
-    private SpeedControllerGroup _lGroup = new SpeedControllerGroup(lfController, lrController);
-    private SpeedControllerGroup _rGroup = new SpeedControllerGroup(rfController, rrController);
-
-    public final DifferentialDrive drive = new DifferentialDrive(_lGroup , _rGroup);
+    private long _leftOffset = 0;
+    private long _rightOffset = 0;
 
 
     /**
-     * Initializes the default command of the drivetrain. Currently, that is nothing
+     * Initializes drivetrain motor controllers. For the drivetrain, each side's Victor SPX follows its corresponding
+     * Talon SRX. Adjustments to the drivetrain should only be done through the Talon SRXs.
      */
-    @Override
-    protected void initDefaultCommand()
+    public Drivetrain()
     {
-        // Nothing :)
+        backLeftController.follow(frontLeftController);
+        backRightController.follow(frontRightController);
+
+        frontLeftController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
+        frontRightController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
+
+        resetEncoders();
+    }
+
+
+    public long leftQuadPos()
+    {
+        return -(frontLeftController.getSelectedSensorPosition(0) - _leftOffset);
+    }
+
+
+    public long rightQuadPos()
+    {
+        return frontRightController.getSelectedSensorPosition(0) - _rightOffset;
+    }
+
+
+    public void resetEncoders()
+    {
+        _leftOffset = frontLeftController.getSelectedSensorPosition(0);
+        _rightOffset = frontRightController.getSelectedSensorPosition(0);
     }
 
 
@@ -36,16 +58,14 @@ public class Drivetrain extends Subsystem
      * Drives the drivetrain in TeleOp using an automatic version of the Cheesy Drive. QuickTurn is run
      * when the forward/backward throttle is less than .05
      *
-     * Skrrt skrrt.
+     * BUY YOUR SHIRTS AND HOODIES HAHAHAHAHAHAHA
      *
-     * @param driver XBox controller that drives the drivetrain
+     * Skrrt skrrt.
      */
-    public void teleOpDrive(XboxController driver)
+    @Override
+    protected void initDefaultCommand()
     {
-        double leftY = driver.getY(GenericHID.Hand.kLeft);
-        double rightX = driver.getX(GenericHID.Hand.kRight);
-
-        drive.curvatureDrive(leftY , rightX , leftY < .05);
+        setDefaultCommand(new StandardDrive());
     }
 
 
@@ -54,6 +74,7 @@ public class Drivetrain extends Subsystem
      */
     public void stop()
     {
-        drive.stopMotor();
+        frontLeftController.set(ControlMode.PercentOutput , 0);
+        frontRightController.set(ControlMode.PercentOutput , 0);
     }
 }

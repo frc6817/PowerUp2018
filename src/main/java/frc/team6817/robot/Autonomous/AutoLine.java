@@ -2,7 +2,7 @@ package frc.team6817.robot.Autonomous;
 
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
-import frc.team6817.robot.Commands.DriveToDistance;
+import frc.team6817.robot.Commands.Drivetrain.DriveToDistance;
 
 
 /**
@@ -10,7 +10,8 @@ import frc.team6817.robot.Commands.DriveToDistance;
  *
  * A game changer
  */
-public class AutoLine extends CommandGroup
+public class
+AutoLine extends CommandGroup
 {
     /**
      * Lays out the commands for the AutoLine autonomous
