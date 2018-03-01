@@ -15,3 +15,7 @@ out/
 .project
 
 .classpath
+
+build/
+gradle/
+temp/
