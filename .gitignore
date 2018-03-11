@@ -21,3 +21,5 @@ QDashBuild
 build/
 gradle/
 temp/
+
+QMLDash/
