@@ -1,7 +1,6 @@
 package frc.team6817.robot.Commands.Drivetrain;
 
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 
 import static frc.team6817.robot.Robot.drivetrain;
@@ -9,19 +8,28 @@ import static frc.team6817.robot.RobotMap.frontLeftController;
 import static frc.team6817.robot.RobotMap.frontRightController;
 
 
-@SuppressWarnings("FieldCanBeLocal")
+/**
+ * Command that requests the robot to drive to a certain distance in inches.
+ */
+@SuppressWarnings({"FieldCanBeLocal", "WeakerAccess"})
 public class DriveToDistance extends PIDCommand
 {
-    private final double COUNTS_PER_INCH = 210.7;
-    private final int TOLERANCE = 100;
+    public static double COUNTS_PER_INCH = 210.7;
+    public static int TOLERANCE = 100;
+
+    public static double P = 2.0;
+    public static double I = 1.0;
+    public static double D = .25;
 
 
     /**
      * Initializes standard PID variables
+     *
+     * @param DISTANCE Distance to drive the robot to in INCHES
      */
     public DriveToDistance(final double DISTANCE)
     {
-        super(2.0 , 0.0 , 0.0);
+        super(P , I , D);
 
         requires(drivetrain);
 
@@ -33,26 +41,42 @@ public class DriveToDistance extends PIDCommand
     }
 
 
+    /**
+     * @return Average quadrature position between both left side and right side of the drivetrain.
+     */
     @Override
     protected double returnPIDInput()
     {
         // Average of the encoder values
-        return (frontLeftController.getSensorCollection().getQuadraturePosition() + frontRightController.getSensorCollection().getQuadraturePosition()) / 2;
+        return (frontLeftController.getSensorCollection().getQuadraturePosition() +
+                frontRightController.getSensorCollection().getQuadraturePosition()) / 2;
     }
 
 
+    /**
+     * Sets the PID output to both sides of the drivetrain.
+     *
+     * @param output Output from PID object
+     */
     @Override
     protected void usePIDOutput(double output)
     {
-        frontLeftController.set(ControlMode.PercentOutput , output);
-        frontRightController.set(ControlMode.PercentOutput , output);
+        drivetrain.setLeftPower(output);
+        drivetrain.setRightPower(output);
     }
 
+
+    /**
+     * @return True if the average quadrature positions of the drivetrain is within the tolerance of the destination.
+     * False otherwise.
+     */
     @Override
     protected boolean isFinished()
     {
         // If the absolute value of the (average of the encoder positions minus the setpoint) is less than or equal
         // to the tolerance
-        return Math.abs((frontLeftController.getSensorCollection().getQuadraturePosition() + frontRightController.getSensorCollection().getQuadraturePosition()) / 2 - this.getSetpoint()) <= TOLERANCE;
+        return Math.abs((frontLeftController.getSensorCollection().getQuadraturePosition()
+                + frontRightController.getSensorCollection().getQuadraturePosition()) / 2 - this.getSetpoint())
+                <= TOLERANCE;
     }
 }

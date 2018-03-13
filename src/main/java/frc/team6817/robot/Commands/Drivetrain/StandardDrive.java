@@ -1,7 +1,6 @@
 package frc.team6817.robot.Commands.Drivetrain;
 
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -31,8 +30,7 @@ public class StandardDrive extends Command
 
 
     /**
-     * Runs the StandardDrive command, a chessy drive implementation. Quickturn is on when the curvature throttle is
-     * less than .05
+     * Runs the StandardDrive command. This is just an arcade drive split between two sticks
      */
     @Override
     public void execute()
@@ -40,8 +38,8 @@ public class StandardDrive extends Command
         double leftY = OI.controller1().getY(GenericHID.Hand.kLeft);
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight);
 
-        frontLeftController.set(ControlMode.PercentOutput , -(leftY - rightX));
-        frontRightController.set(ControlMode.PercentOutput , leftY + rightX);
+        drivetrain.setLeftPower(leftY - rightX);
+        drivetrain.setRightPower(leftY + rightX);
 
         SmartDashboard.putNumber("Left Encoder" , drivetrain.leftQuadPos());
         SmartDashboard.putNumber("Right Encoder" , drivetrain.rightQuadPos());
