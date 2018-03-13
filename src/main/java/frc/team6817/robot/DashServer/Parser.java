@@ -6,9 +6,17 @@ import frc.team6817.robot.Commands.Drivetrain.PrecisionDrive;
 import frc.team6817.robot.Robot;
 
 
+/**
+ * Parses the messages received from the DashServer and then notifies the appropriate classes of changes in data.
+ */
 @SuppressWarnings("WeakerAccess")
-public class Parser
+class Parser
 {
+    /**
+     * Parses the messages received from the DashServer and then notifies the appropriate classes of changes in data.
+     *
+     * @param data Message list received from the DashServer
+     */
     public static void parseData(String data)
     {
         String individualMsg;

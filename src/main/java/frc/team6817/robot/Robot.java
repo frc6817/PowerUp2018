@@ -23,13 +23,19 @@ import frc.team6817.robot.Subsystems.Flipper;
 @SuppressWarnings("WeakerAccess")
 public class Robot extends TimedRobot
 {
+    /** Drivetrain component of the robot */
     public static final Drivetrain drivetrain = new Drivetrain();
+
+    /** Block intake component of the robot */
     public static final BlockIntake blockIntake = new BlockIntake();
+
+    /** Block flipper component of the robot */
     public static final Flipper flipper = new Flipper();
 
-    public static final DashServer dashServer = new DashServer(1560);
-
+    /** Autonomous the robot runs during the auto period */
     public static CommandGroup auto;
+
+    public static final DashServer dashServer = new DashServer(1560);
 
 
     /**
