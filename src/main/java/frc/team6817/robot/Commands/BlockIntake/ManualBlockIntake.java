@@ -12,7 +12,7 @@ import static frc.team6817.robot.RobotMap.*;
 
 public class ManualBlockIntake extends Command
 {
-    private final double _MULTIPLIER = .5;
+    public static double THROTTLE = .5;
 
 
     public ManualBlockIntake()
@@ -42,8 +42,8 @@ public class ManualBlockIntake extends Command
             dualIntake.set(DoubleSolenoid.Value.kReverse);
         }
 
-        leftIntakeController.set(intakePower * _MULTIPLIER);
-        rightIntakeController.set(-intakePower * _MULTIPLIER);
+        leftIntakeController.set(intakePower * THROTTLE);
+        rightIntakeController.set(-intakePower * THROTTLE);
     }
 
 

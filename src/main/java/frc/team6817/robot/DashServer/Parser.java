@@ -2,7 +2,11 @@ package frc.team6817.robot.DashServer;
 
 
 import frc.team6817.robot.Autonomous.AutoLeft;
+import frc.team6817.robot.Commands.BlockIntake.ManualBlockIntake;
 import frc.team6817.robot.Commands.Drivetrain.PrecisionDrive;
+import frc.team6817.robot.Commands.Drivetrain.RotateToDegree;
+import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
+import frc.team6817.robot.Commands.Flipper.ManualFlip;
 import frc.team6817.robot.Robot;
 
 
@@ -34,17 +38,20 @@ class Parser
 
             switch(tag)
             {
-                case "StartPos":
+                case "Delay":
+                    break;
+
+                case "Pos":
                     switch(msg)
                     {
-                        case "left":
+                        case "Left":
                             Robot.auto = new AutoLeft();
                             break;
 
-                        case "center":
+                        case "Center":
                             break;
 
-                        case "right":
+                        case "Right":
                             break;
 
                         default:
@@ -54,16 +61,35 @@ class Parser
 
                     break;
 
-                case "PercentPrecision":
-                    PrecisionDrive.DRIVE_MULTIPLIER = Double.valueOf(msg);
+                case "Drive":
+                    StandardDrive.THROTTLE = Double.valueOf(msg) / 100.0;
                     break;
 
-                case "StartDelay":
-
+                case "PDrive":
+                    PrecisionDrive.DRIVE_MULTIPLIER = Double.valueOf(msg) / 100.0;
                     break;
+
+                case "Flip":
+                    ManualFlip.THROTTLE = Double.valueOf(msg) / 100.0;
+                    break;
+
+                case "Fly":
+                    ManualBlockIntake.THROTTLE = Double.valueOf(msg) / 100.0;
+                    break;
+
+                case "TurnP":
+                    RotateToDegree.P = Double.valueOf(msg);
+                    break;
+
+                case "TurnI":
+                    RotateToDegree.I = Double.valueOf(msg);
+                    break;
+
+                case "TurnD":
+                    RotateToDegree.D = Double.valueOf(msg);
 
                 default:
-                    // Nothing- discard message
+                  // Nothing- discard message
                     break;
             }
         }

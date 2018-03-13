@@ -18,6 +18,9 @@ import static frc.team6817.robot.RobotMap.frontRightController;
  */
 public class StandardDrive extends Command
 {
+    public static double THROTTLE = 1;
+
+
     /**
      * Creates a StandardDrive Command- invokes the superconstructor
      */
@@ -35,8 +38,8 @@ public class StandardDrive extends Command
     @Override
     public void execute()
     {
-        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft);
-        double rightX = OI.controller1().getX(GenericHID.Hand.kRight);
+        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * THROTTLE;
+        double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * THROTTLE;
 
         drivetrain.setLeftPower(leftY - rightX);
         drivetrain.setRightPower(leftY + rightX);
