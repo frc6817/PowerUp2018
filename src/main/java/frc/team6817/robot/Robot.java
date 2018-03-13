@@ -43,10 +43,6 @@ public class Robot extends TimedRobot
 
         CameraManager.start();
 
-        TableServer.init();
-        TableServer tableServer = new TableServer();
-        tableServer.start();
-
         dashServer.start();
     }
 
