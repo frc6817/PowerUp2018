@@ -97,6 +97,7 @@ public class Robot extends TimedRobot
     public void disabledPeriodic()
     {
         FMSReader.readFMS();
+        sendInfoToQDash();
     }
 
 
@@ -107,6 +108,7 @@ public class Robot extends TimedRobot
     public void autonomousPeriodic()
     {
         Scheduler.getInstance().run();
+        sendInfoToQDash();
     }
 
 
@@ -119,6 +121,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
+        sendInfoToQDash();
 
         dashServer.sendMessage("Test" , "Hello from the RoboRio!");
 
@@ -134,6 +137,18 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic()
     {
+        sendInfoToQDash();
+    }
 
+
+    private void sendInfoToQDash()
+    {
+        dashServer.sendMessage("Yaw" , String.valueOf(RobotMap.navx.getYaw()));
+        dashServer.sendMessage("Roll" , String.valueOf(RobotMap.navx.getRoll()));
+        dashServer.sendMessage("Pitch" , String.valueOf(RobotMap.navx.getPitch()));
+
+        dashServer.sendMessage("LEnc" , String.valueOf(drivetrain.leftQuadPos()));
+        dashServer.sendMessage("REnc" , String.valueOf(drivetrain.rightQuadPos()));
+        dashServer.sendMessage("FEnc" , String.valueOf(flipper.pos()));
     }
 }

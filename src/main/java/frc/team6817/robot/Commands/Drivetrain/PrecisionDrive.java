@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.OI;
+import frc.team6817.robot.Robot;
 
 import static frc.team6817.robot.Robot.drivetrain;
 
@@ -42,6 +43,7 @@ public class PrecisionDrive extends Command
         drivetrain.setRightPower(leftY + rightX);
 
         SmartDashboard.putString("Precision Drive" , "On");
+        Robot.dashServer.sendMessage("Slow" , "1");
     }
 
 

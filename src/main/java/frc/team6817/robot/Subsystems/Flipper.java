@@ -35,6 +35,15 @@ public class Flipper extends PIDSubsystem
 
 
     /**
+     * @return Quadrature position of the flipper
+     */
+    public long pos()
+    {
+        return flipController.getSelectedSensorPosition(0);
+    }
+
+
+    /**
      * Stops the motors
      */
     public void stop()
