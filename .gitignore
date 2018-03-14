@@ -15,3 +15,11 @@ out/
 .project
 
 .classpath
+
+QDashBuild
+
+build/
+gradle/
+temp/
+
+QMLDash/

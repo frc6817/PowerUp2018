@@ -1,11 +1,11 @@
 package frc.team6817.robot.Commands.Drivetrain;
 
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.OI;
+import frc.team6817.robot.Robot;
 
 import static frc.team6817.robot.Robot.drivetrain;
 import static frc.team6817.robot.RobotMap.frontLeftController;
@@ -19,6 +19,9 @@ import static frc.team6817.robot.RobotMap.frontRightController;
  */
 public class StandardDrive extends Command
 {
+    public static double THROTTLE = 1;
+
+
     /**
      * Creates a StandardDrive Command- invokes the superconstructor
      */
@@ -31,17 +34,16 @@ public class StandardDrive extends Command
 
 
     /**
-     * Runs the StandardDrive command, a chessy drive implementation. Quickturn is on when the curvature throttle is
-     * less than .05
+     * Runs the StandardDrive command. This is just an arcade drive split between two sticks
      */
     @Override
     public void execute()
     {
-        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft);
-        double rightX = OI.controller1().getX(GenericHID.Hand.kRight);
+        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * THROTTLE;
+        double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * THROTTLE;
 
-        frontLeftController.set(ControlMode.PercentOutput , -(leftY - rightX));
-        frontRightController.set(ControlMode.PercentOutput , leftY + rightX);
+        drivetrain.setLeftPower(leftY - rightX);
+        drivetrain.setRightPower(leftY + rightX);
 
         SmartDashboard.putNumber("Left Encoder" , drivetrain.leftQuadPos());
         SmartDashboard.putNumber("Right Encoder" , drivetrain.rightQuadPos());
@@ -50,6 +52,7 @@ public class StandardDrive extends Command
         SmartDashboard.putNumber("Right Quad" , frontRightController.getSensorCollection().getQuadraturePosition());
 
         SmartDashboard.putString("Precision Drive" , "Off");
+        Robot.dashServer.sendMessage("Slow" , "0");
     }
 
 

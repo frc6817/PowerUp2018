@@ -23,13 +23,19 @@ import frc.team6817.robot.Subsystems.Flipper;
 @SuppressWarnings("WeakerAccess")
 public class Robot extends TimedRobot
 {
+    /** Drivetrain component of the robot */
     public static final Drivetrain drivetrain = new Drivetrain();
+
+    /** Block intake component of the robot */
     public static final BlockIntake blockIntake = new BlockIntake();
+
+    /** Block flipper component of the robot */
     public static final Flipper flipper = new Flipper();
 
-    public static final DashServer dashServer = new DashServer(1560);
-
+    /** Autonomous the robot runs during the auto period */
     public static CommandGroup auto;
+
+    public static final DashServer dashServer = new DashServer(1560);
 
 
     /**
@@ -42,10 +48,6 @@ public class Robot extends TimedRobot
         OI.init(0 , 1);
 
         CameraManager.start();
-
-        TableServer.init();
-        TableServer tableServer = new TableServer();
-        tableServer.start();
 
         dashServer.start();
     }
@@ -95,6 +97,7 @@ public class Robot extends TimedRobot
     public void disabledPeriodic()
     {
         FMSReader.readFMS();
+        sendInfoToQDash();
     }
 
 
@@ -105,6 +108,7 @@ public class Robot extends TimedRobot
     public void autonomousPeriodic()
     {
         Scheduler.getInstance().run();
+        sendInfoToQDash();
     }
 
 
@@ -117,6 +121,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
+        sendInfoToQDash();
 
         dashServer.sendMessage("Test" , "Hello from the RoboRio!");
 
@@ -132,6 +137,18 @@ public class Robot extends TimedRobot
     @Override
     public void testPeriodic()
     {
+        sendInfoToQDash();
+    }
 
+
+    private void sendInfoToQDash()
+    {
+        dashServer.sendMessage("Yaw" , String.valueOf(RobotMap.navx.getYaw()));
+        dashServer.sendMessage("Roll" , String.valueOf(RobotMap.navx.getRoll()));
+        dashServer.sendMessage("Pitch" , String.valueOf(RobotMap.navx.getPitch()));
+
+        dashServer.sendMessage("LEnc" , String.valueOf(drivetrain.leftQuadPos()));
+        dashServer.sendMessage("REnc" , String.valueOf(drivetrain.rightQuadPos()));
+        dashServer.sendMessage("FEnc" , String.valueOf(flipper.pos()));
     }
 }

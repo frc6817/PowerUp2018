@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import static frc.team6817.robot.Robot.drivetrain;
 
 
+/**
+ * Command that runs the robot drivetrain for a certain period of time.
+ */
 public class DriveForTime extends Command
 {
     private double _leftPower;
@@ -43,7 +46,8 @@ public class DriveForTime extends Command
         //noinspection StatementWithEmptyBody
         while(System.currentTimeMillis() - startTime < _time)
         {
-//            drivetrain.tankDrive(-_leftPower , -_rightPower , false);
+            drivetrain.setLeftPower(_leftPower);
+            drivetrain.setRightPower(_rightPower);
         }
 
         _finished = true;
