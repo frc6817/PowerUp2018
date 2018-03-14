@@ -35,7 +35,7 @@ public class Robot extends TimedRobot
     /** Autonomous the robot runs during the auto period */
     public static CommandGroup auto;
 
-    public static final DashServer dashServer = new DashServer(1560);
+    public static final DashServer dashServer = new DashServer(6817);
 
 
     /**
