@@ -78,7 +78,7 @@ public class OI
         // Tie buttons to commands
         lStick1.toggleWhenPressed(new PrecisionDrive());
 
-        a1.whenPressed(new RotateToDegree(90));
+        a1.whileHeld(new RotateToDegree(90));
     }
 
 
