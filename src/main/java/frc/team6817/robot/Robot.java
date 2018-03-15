@@ -8,10 +8,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
 import frc.team6817.robot.DashServer.DashServer;
-import frc.team6817.robot.Subsystems.BlockIntake;
-import frc.team6817.robot.Subsystems.Drivetrain;
-import frc.team6817.robot.Subsystems.Flipper;
-import frc.team6817.robot.Subsystems.Lift;
+import frc.team6817.robot.Subsystems.*;
 
 
 /**
@@ -34,6 +31,8 @@ public class Robot extends TimedRobot
     public static final Flipper flipper = new Flipper();
 
     public static final Lift lift = new Lift();
+
+    public static final Winch winch = new Winch();
 
 
     /** Autonomous the robot runs during the auto period */
