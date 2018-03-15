@@ -66,6 +66,8 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
+        dashServer.sendMessage("Auto" , " ");
+
         if(auto != null)
         {
             auto.start();
@@ -76,6 +78,8 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit()
     {
+        dashServer.sendMessage("TeleOp" , " ");
+
         if(auto != null)
         {
             auto.cancel();
