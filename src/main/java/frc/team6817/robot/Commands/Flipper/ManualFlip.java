@@ -26,7 +26,7 @@ public class ManualFlip extends Command
     @Override
     public void execute()
     {
-        double powerLevel = OI.controller2().getY(GenericHID.Hand.kRight);
+        double powerLevel = OI.controller2().getY(GenericHID.Hand.kLeft);
 
         flipController.set(ControlMode.PercentOutput , powerLevel * THROTTLE);
     }

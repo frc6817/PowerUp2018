@@ -17,9 +17,9 @@ public class DriveToDistance extends PIDCommand
     public static double COUNTS_PER_INCH = 210.7;
     public static int TOLERANCE = 100;
 
-    public static double P = 2.0;
-    public static double I = 1.0;
-    public static double D = .25;
+    public static double P = 0;
+    public static double I = 0;
+    public static double D = 0;
 
 
     /**

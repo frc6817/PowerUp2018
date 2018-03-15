@@ -83,7 +83,7 @@ public class OI
 
 
     /**
-     * @return Returns the first Xbox controller
+     * @return Returns                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         the first Xbox controller
      */
     public static XboxController controller1()
     {
