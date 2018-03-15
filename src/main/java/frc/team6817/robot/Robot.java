@@ -11,6 +11,7 @@ import frc.team6817.robot.DashServer.DashServer;
 import frc.team6817.robot.Subsystems.BlockIntake;
 import frc.team6817.robot.Subsystems.Drivetrain;
 import frc.team6817.robot.Subsystems.Flipper;
+import frc.team6817.robot.Subsystems.Lift;
 
 
 /**
@@ -31,6 +32,9 @@ public class Robot extends TimedRobot
 
     /** Block flipper component of the robot */
     public static final Flipper flipper = new Flipper();
+
+    public static final Lift lift = new Lift();
+
 
     /** Autonomous the robot runs during the auto period */
     public static CommandGroup auto;

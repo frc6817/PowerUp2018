@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.VictorSP;
 
 
 /**
@@ -30,12 +31,17 @@ public class RobotMap
     public static final DoubleSolenoid dualIntake = new DoubleSolenoid(3 , 4);
 
 
-    //Flipper Controller
+    // Flipper Controller
     public static final TalonSRX flipController = new TalonSRX(0);
 
 
-    //Winch Controller
-    public static final Spark winchController = new Spark(4);
+    // Lift Controller
+    public static final Spark liftController = new Spark(3);
+
+
+    // Winch Controller
+    public static final VictorSP winchController1 = new VictorSP(0);
+    public static final VictorSP winchController2 = new VictorSP(1);
 
 
     // NavX
