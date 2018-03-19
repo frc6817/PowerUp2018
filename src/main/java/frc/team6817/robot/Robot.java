@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
+import frc.team6817.robot.Commands.BlockIntake.ActuateArms;
+import frc.team6817.robot.Commands.Drivetrain.DriveForTime;
+import frc.team6817.robot.Commands.Flipper.FlipForTime;
 import frc.team6817.robot.DashServer.DashServer;
 import frc.team6817.robot.Subsystems.*;
 
@@ -71,10 +74,24 @@ public class Robot extends TimedRobot
     {
         dashServer.sendMessage("Auto" , " ");
 
-        if(auto != null)
-        {
-            auto.start();
+//        auto = new AutoLine();
+//
+//        if(auto != null)
+//        {
+//            auto.start();
+//        }
+
+        new ActuateArms(false).execute();
+
+        try {
+            Thread.sleep(2_000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+
+        new FlipForTime(100 , .4).execute();
+        new DriveForTime(-1 , -1 , 2_000).execute();
     }
 
 

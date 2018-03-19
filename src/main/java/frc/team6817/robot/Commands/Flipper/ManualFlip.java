@@ -12,7 +12,7 @@ import static frc.team6817.robot.RobotMap.flipController;
 
 public class ManualFlip extends Command
 {
-    public static double THROTTLE = .60;
+    public static double THROTTLE = .75;
 
 
     public ManualFlip()

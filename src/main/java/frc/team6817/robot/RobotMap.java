@@ -36,12 +36,12 @@ public class RobotMap
 
 
     // Lift Controller
-    public static final Spark liftController = new Spark(3);
+    public static final Spark liftController = new Spark(8);
 
 
     // Winch Controller
-    public static final VictorSP winchController1 = new VictorSP(0);
-    public static final VictorSP winchController2 = new VictorSP(1);
+    public static final VictorSP winchController1 = new VictorSP(3);
+    public static final Spark winchController2 = new Spark(4);
 
 
     // NavX

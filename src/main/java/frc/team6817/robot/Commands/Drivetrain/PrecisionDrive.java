@@ -16,7 +16,7 @@ import static frc.team6817.robot.Robot.drivetrain;
  */
 public class PrecisionDrive extends Command
 {
-    public static double DRIVE_MULTIPLIER = .5;
+    public static double DRIVE_MULTIPLIER = .8;
 
 
     /**

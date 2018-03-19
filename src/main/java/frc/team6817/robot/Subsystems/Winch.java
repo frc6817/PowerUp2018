@@ -14,12 +14,6 @@ public class Winch extends Subsystem
     private SpeedControllerGroup _winchController = new SpeedControllerGroup(winchController1 , winchController2);
 
 
-    public Winch()
-    {
-        // Nothing
-    }
-
-
     @Override
     protected void initDefaultCommand()
     {

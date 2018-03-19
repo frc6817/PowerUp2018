@@ -29,7 +29,7 @@ public class ManualLift extends Command
             powerLevel = -OI.controller1().getTriggerAxis(GenericHID.Hand.kLeft);
         }
 
-        powerLevel *= .3;
+        powerLevel *= -.75;
 
         liftController.set(powerLevel);
     }

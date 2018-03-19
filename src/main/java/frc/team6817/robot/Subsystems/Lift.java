@@ -2,20 +2,14 @@ package frc.team6817.robot.Subsystems;
 
 
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.team6817.robot.Commands.Flipper.ManualFlip;
+import frc.team6817.robot.Commands.Lift.ManualLift;
 
 
 public class Lift extends Subsystem
 {
-    public Lift()
-    {
-        // Nothing
-    }
-
-
     @Override
     protected void initDefaultCommand()
     {
-        setDefaultCommand(new ManualFlip());
+        setDefaultCommand(new ManualLift());
     }
 }

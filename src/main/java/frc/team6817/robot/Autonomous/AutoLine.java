@@ -10,8 +10,7 @@ import frc.team6817.robot.Commands.Drivetrain.DriveToDistance;
  *
  * A game changer
  */
-public class
-AutoLine extends CommandGroup
+public class AutoLine extends CommandGroup
 {
     /**
      * Lays out the commands for the AutoLine autonomous

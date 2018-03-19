@@ -23,13 +23,13 @@ public class ManualWinch extends Command
     {
         double powerLevel = 0;
 
-        if(OI.controller1().getBumperPressed(GenericHID.Hand.kRight))
+        if(OI.controller1().getBumper(GenericHID.Hand.kRight))
         {
-            powerLevel = 75;
+            powerLevel = 1;
         }
-        else if(OI.controller1().getBumperPressed(GenericHID.Hand.kLeft))
+        else if(OI.controller1().getBumper(GenericHID.Hand.kLeft))
         {
-            powerLevel = -.75;
+            powerLevel = -1;
         }
 
         winch.controller().set(powerLevel);

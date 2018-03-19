@@ -33,11 +33,11 @@ public class ManualBlockIntake extends Command
             intakePower = OI.controller2().getTriggerAxis(GenericHID.Hand.kRight);
         }
 
-        if(OI.controller2().getBumperPressed(GenericHID.Hand.kLeft))
+        if(OI.controller2().getBumperPressed(GenericHID.Hand.kRight))
         {
             dualIntake.set(DoubleSolenoid.Value.kForward);
         }
-        else if(OI.controller2().getBumperPressed(GenericHID.Hand.kRight))
+        else if(OI.controller2().getBumperPressed(GenericHID.Hand.kLeft))
         {
             dualIntake.set(DoubleSolenoid.Value.kReverse);
         }
