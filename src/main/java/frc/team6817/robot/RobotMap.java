@@ -1,8 +1,8 @@
 package frc.team6817.robot;
 
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SPI;
@@ -17,10 +17,10 @@ import edu.wpi.first.wpilibj.VictorSP;
 public class RobotMap
 {
     // Drivetrain controllers
-    public static final TalonSRX frontLeftController = new TalonSRX(1);
-    public static final TalonSRX frontRightController = new TalonSRX(2);
-    public static final VictorSPX backLeftController = new VictorSPX(0);
-    public static final VictorSPX backRightController = new VictorSPX(1);
+    public static final WPI_TalonSRX frontLeftController = new WPI_TalonSRX(1);
+    public static final WPI_TalonSRX frontRightController = new WPI_TalonSRX(2);
+    public static final WPI_VictorSPX backLeftController = new WPI_VictorSPX(0);
+    public static final WPI_VictorSPX backRightController = new WPI_VictorSPX(1);
 
 
     // Block Intake controllers
@@ -32,7 +32,7 @@ public class RobotMap
 
 
     // Flipper Controller
-    public static final TalonSRX flipController = new TalonSRX(0);
+    public static final WPI_TalonSRX flipController = new WPI_TalonSRX(0);
 
 
     // Lift Controller

@@ -3,7 +3,10 @@ package frc.team6817.robot.Subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
 
 import static frc.team6817.robot.RobotMap.*;
@@ -19,6 +22,11 @@ public class Drivetrain extends Subsystem
     private long _leftOffset = 0;
     private long _rightOffset = 0;
 
+    private SpeedControllerGroup _leftController;
+    private SpeedControllerGroup _rightController;
+
+    private DifferentialDrive _diffDrive;
+
 
     /**
      * Initializes drivetrain motor controllers. For the drivetrain, each side's Victor SPX follows its corresponding
@@ -31,6 +39,15 @@ public class Drivetrain extends Subsystem
 
         frontLeftController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
         frontRightController.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute , 0 , 0);
+
+        frontLeftController.setNeutralMode(NeutralMode.Coast);
+        frontRightController.setNeutralMode(NeutralMode.Coast);
+
+
+        _leftController = new SpeedControllerGroup(frontLeftController , backLeftController);
+        _rightController = new SpeedControllerGroup(frontRightController , backRightController);
+
+        _diffDrive = new DifferentialDrive(_leftController , _rightController);
 
         resetEncoders();
     }
@@ -87,6 +104,16 @@ public class Drivetrain extends Subsystem
         _leftOffset = frontLeftController.getSelectedSensorPosition(0);
         _rightOffset = frontRightController.getSelectedSensorPosition(0);
     }
+
+
+    /**
+     * @return Returns the DifferentialDrive object
+     */
+    public DifferentialDrive drive()
+    {
+        return _diffDrive;
+    }
+
 
 
     /**

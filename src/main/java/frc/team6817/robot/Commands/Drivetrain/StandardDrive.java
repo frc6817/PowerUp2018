@@ -3,13 +3,10 @@ package frc.team6817.robot.Commands.Drivetrain;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.OI;
 import frc.team6817.robot.Robot;
 
 import static frc.team6817.robot.Robot.drivetrain;
-import static frc.team6817.robot.RobotMap.frontLeftController;
-import static frc.team6817.robot.RobotMap.frontRightController;
 
 
 /**
@@ -42,16 +39,8 @@ public class StandardDrive extends Command
         double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * THROTTLE;
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * THROTTLE;
 
-        drivetrain.setLeftPower(leftY - rightX);
-        drivetrain.setRightPower(leftY + rightX);
+        drivetrain.drive().curvatureDrive(leftY , rightX , leftY <= .05);
 
-        SmartDashboard.putNumber("Left Encoder" , drivetrain.leftQuadPos());
-        SmartDashboard.putNumber("Right Encoder" , drivetrain.rightQuadPos());
-
-        SmartDashboard.putNumber("Left Quad" , frontLeftController.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("Right Quad" , frontRightController.getSensorCollection().getQuadraturePosition());
-
-        SmartDashboard.putString("Precision Drive" , "Off");
         Robot.dashServer.sendMessage("Slow" , "0");
     }
 

@@ -3,7 +3,6 @@ package frc.team6817.robot.Commands.Drivetrain;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.OI;
 import frc.team6817.robot.Robot;
 
@@ -39,10 +38,8 @@ public class PrecisionDrive extends Command
         double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * DRIVE_MULTIPLIER;
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * DRIVE_MULTIPLIER;
 
-        drivetrain.setLeftPower(leftY - rightX);
-        drivetrain.setRightPower(leftY + rightX);
+        drivetrain.drive().curvatureDrive(leftY , rightX , leftY <= .05);
 
-        SmartDashboard.putString("Precision Drive" , "On");
         Robot.dashServer.sendMessage("Slow" , "1");
     }
 
