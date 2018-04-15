@@ -49,6 +49,8 @@ public class Drivetrain extends Subsystem
 
         _diffDrive = new DifferentialDrive(_leftController , _rightController);
 
+        setRampTime(0 , 0);
+
         resetEncoders();
     }
 
@@ -115,7 +117,6 @@ public class Drivetrain extends Subsystem
     }
 
 
-
     /**
      * Drives the drivetrain in TeleOp using a split version of the arcade drive.
      *
@@ -125,6 +126,20 @@ public class Drivetrain extends Subsystem
     protected void initDefaultCommand()
     {
         setDefaultCommand(new StandardDrive());
+    }
+
+
+    /**
+     * Places a ramp on the drivetrain motors as specified. Use this to reduce jerking
+     * on sudden acceleration.
+     *
+     * @param rampTime Minimum time it takes to go from 0 to max
+     * @param timeoutMs Time in milliseconds to take before ramp times out
+     */
+    public void setRampTime(double rampTime , int timeoutMs)
+    {
+        frontLeftController.configOpenloopRamp(rampTime , timeoutMs);
+        frontRightController.configOpenloopRamp(rampTime , timeoutMs);
     }
 
 

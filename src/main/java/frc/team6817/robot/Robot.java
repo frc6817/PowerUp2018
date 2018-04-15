@@ -74,13 +74,8 @@ public class Robot extends TimedRobot
     {
         dashServer.sendMessage("Auto" , " ");
 
-//        auto = new AutoLine();
-//
-//        if(auto != null)
-//        {
-//            auto.start();
-//        }
 
+        // Needlessly complicated baseline auto
         new ActuateArms(false).execute();
 
         try {
@@ -91,7 +86,11 @@ public class Robot extends TimedRobot
 
 
         new FlipForTime(100 , .4).execute();
+
+
+        drivetrain.setRampTime(2_000 , 5_000);
         new DriveForTime(-1 , -1 , 2_000).execute();
+        drivetrain.setRampTime(0 , 0);
     }
 
 
