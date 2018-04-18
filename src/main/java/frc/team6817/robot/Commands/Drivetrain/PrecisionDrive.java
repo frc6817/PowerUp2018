@@ -35,7 +35,7 @@ public class PrecisionDrive extends Command
     @Override
     public void execute()
     {
-        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * DRIVE_MULTIPLIER;
+        double leftY = -OI.controller1().getY(GenericHID.Hand.kLeft) * DRIVE_MULTIPLIER;
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * DRIVE_MULTIPLIER;
 
         drivetrain.drive().curvatureDrive(leftY , rightX , leftY <= .05);

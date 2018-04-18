@@ -36,7 +36,7 @@ public class StandardDrive extends Command
     @Override
     public void execute()
     {
-        double leftY = OI.controller1().getY(GenericHID.Hand.kLeft) * THROTTLE;
+        double leftY = -OI.controller1().getY(GenericHID.Hand.kLeft) * THROTTLE;
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * THROTTLE;
 
         drivetrain.drive().curvatureDrive(leftY , rightX , leftY <= .05);
