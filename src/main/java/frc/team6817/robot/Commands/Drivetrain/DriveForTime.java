@@ -2,6 +2,7 @@ package frc.team6817.robot.Commands.Drivetrain;
 
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.team6817.robot.RobotMap;
 
 import static frc.team6817.robot.Robot.drivetrain;
 
@@ -46,8 +47,8 @@ public class DriveForTime extends Command
         //noinspection StatementWithEmptyBody
         while(System.currentTimeMillis() - startTime < _time)
         {
-            drivetrain.setLeftPower(_leftPower);
-            drivetrain.setRightPower(_rightPower);
+            RobotMap.frontLeftController.set(_leftPower);
+            RobotMap.frontRightController.set(_rightPower);
         }
 
         _finished = true;

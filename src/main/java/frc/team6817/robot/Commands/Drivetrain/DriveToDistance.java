@@ -2,6 +2,7 @@ package frc.team6817.robot.Commands.Drivetrain;
 
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import frc.team6817.robot.RobotMap;
 
 import static frc.team6817.robot.Robot.drivetrain;
 import static frc.team6817.robot.RobotMap.frontLeftController;
@@ -61,8 +62,8 @@ public class DriveToDistance extends PIDCommand
     @Override
     protected void usePIDOutput(double output)
     {
-        drivetrain.setLeftPower(output);
-        drivetrain.setRightPower(output);
+        RobotMap.frontLeftController.set(output);
+        RobotMap.frontRightController.set(output);
     }
 
 

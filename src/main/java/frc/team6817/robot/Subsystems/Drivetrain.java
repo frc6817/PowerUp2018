@@ -43,6 +43,9 @@ public class Drivetrain extends Subsystem
         frontLeftController.setNeutralMode(NeutralMode.Coast);
         frontRightController.setNeutralMode(NeutralMode.Coast);
 
+        frontLeftController.setInverted(false);
+        frontRightController.setInverted(true);
+
 
         _leftController = new SpeedControllerGroup(frontLeftController , backLeftController);
         _rightController = new SpeedControllerGroup(frontRightController , backRightController);
@@ -53,31 +56,6 @@ public class Drivetrain extends Subsystem
 
         resetEncoders();
     }
-
-
-    /**
-     * Manages the setting of the left drivetrain power. Because the motors on the left side spin the
-     * opposite direction, they are wrapped such that they will spin backwards and therefore forwards relative to
-     * us.
-     *
-     * @param power Power level between [-1 , 1] to set to the left side
-     */
-    public void setLeftPower(double power)
-    {
-        frontLeftController.set(ControlMode.PercentOutput , -power);
-    }
-
-
-    /**
-     * Manages the setting of the right drivetrain power. For now, just sets the drivetrain power as the power provided
-     *
-     * @param power Power level between [-1 , 1] to set to the right side
-     */
-    public void setRightPower(double power)
-    {
-        frontRightController.set(ControlMode.PercentOutput , power);
-    }
-
 
 
     /**

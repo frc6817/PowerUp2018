@@ -60,8 +60,8 @@ public class RotateToDegree extends PIDCommand
     @Override
     protected void usePIDOutput(double output)
     {
-        drivetrain.setLeftPower(-output);   // Negate so that the robot turns
-        drivetrain.setRightPower(output);
+        RobotMap.frontLeftController.set(output);
+        RobotMap.frontRightController.set(-output);
     }
 
 
