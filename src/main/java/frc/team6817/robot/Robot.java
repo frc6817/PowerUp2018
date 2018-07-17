@@ -7,11 +7,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.team6817.robot.Autonomous.FMSReader;
-import frc.team6817.robot.Commands.BlockIntake.ActuateArms;
-import frc.team6817.robot.Commands.Drivetrain.DriveForTime;
-import frc.team6817.robot.Commands.Flipper.FlipForTime;
+import frc.team6817.robot.Commands.Drivetrain.RampToSpeed;
 import frc.team6817.robot.DashServer.DashServer;
-import frc.team6817.robot.Subsystems.*;
+import frc.team6817.robot.Subsystems.BlockIntake;
+import frc.team6817.robot.Subsystems.Drivetrain;
 
 
 /**
@@ -29,13 +28,6 @@ public class Robot extends TimedRobot
 
     /** Block intake component of the robot */
     public static final BlockIntake blockIntake = new BlockIntake();
-
-    /** Block flipper component of the robot */
-    public static final Flipper flipper = new Flipper();
-
-    public static final Lift lift = new Lift();
-
-    public static final Winch winch = new Winch();
 
 
     /** Autonomous the robot runs during the auto period */
@@ -75,9 +67,6 @@ public class Robot extends TimedRobot
         dashServer.sendMessage("Auto" , " ");
 
 
-        // Needlessly complicated baseline auto
-        new ActuateArms(false).execute();
-
         try {
             Thread.sleep(2_000);
         } catch (InterruptedException e) {
@@ -85,12 +74,8 @@ public class Robot extends TimedRobot
         }
 
 
-        new FlipForTime(100 , .4).execute();
-
-
-        drivetrain.setRampTime(2_000 , 5_000);
-        new DriveForTime(-1 , -1 , 2_000).execute();
-        drivetrain.setRampTime(0 , 0);
+        new RampToSpeed(1 , 2_000).execute();
+//        new DriveForTime(1 , 1 , 1_000).execute();
     }
 
 
@@ -169,9 +154,5 @@ public class Robot extends TimedRobot
         dashServer.sendMessage("Yaw" , String.valueOf(RobotMap.navx.getYaw()));
         dashServer.sendMessage("Roll" , String.valueOf(RobotMap.navx.getRoll()));
         dashServer.sendMessage("Pitch" , String.valueOf(RobotMap.navx.getPitch()));
-
-        dashServer.sendMessage("LEnc" , String.valueOf(drivetrain.leftQuadPos()));
-        dashServer.sendMessage("REnc" , String.valueOf(drivetrain.rightQuadPos()));
-        dashServer.sendMessage("FEnc" , String.valueOf(flipper.pos()));
     }
 }

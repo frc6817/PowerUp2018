@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 import static frc.team6817.robot.Robot.blockIntake;
-import static frc.team6817.robot.RobotMap.dualIntake;
+import static frc.team6817.robot.RobotMap.intakeArms;
 
 
 public class ActuateArms extends Command
@@ -28,11 +28,11 @@ public class ActuateArms extends Command
     {
         if(_actuateOutward)
         {
-            dualIntake.set(DoubleSolenoid.Value.kForward);
+            intakeArms.set(DoubleSolenoid.Value.kForward);
         }
         else
         {
-            dualIntake.set(DoubleSolenoid.Value.kReverse);
+            intakeArms.set(DoubleSolenoid.Value.kReverse);
         }
     }
 
@@ -54,7 +54,7 @@ public class ActuateArms extends Command
     @Override
     protected boolean isFinished()
     {
-        return (dualIntake.get() == DoubleSolenoid.Value.kForward && _actuateOutward)
-                || (dualIntake.get() == DoubleSolenoid.Value.kReverse && !_actuateOutward);
+        return (intakeArms.get() == DoubleSolenoid.Value.kForward && _actuateOutward)
+                || (intakeArms.get() == DoubleSolenoid.Value.kReverse && !_actuateOutward);
     }
 }

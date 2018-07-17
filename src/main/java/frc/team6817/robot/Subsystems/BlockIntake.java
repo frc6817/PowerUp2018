@@ -4,8 +4,7 @@ package frc.team6817.robot.Subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.team6817.robot.Commands.BlockIntake.ManualBlockIntake;
 
-import static frc.team6817.robot.RobotMap.leftIntakeController;
-import static frc.team6817.robot.RobotMap.rightIntakeController;
+import static frc.team6817.robot.RobotMap.flip1;
 
 
 public class BlockIntake extends Subsystem
@@ -21,7 +20,6 @@ public class BlockIntake extends Subsystem
      */
     @Override
     protected void initDefaultCommand()
-
     {
         setDefaultCommand(new ManualBlockIntake());
     }
@@ -33,7 +31,6 @@ public class BlockIntake extends Subsystem
      */
     public void stop()
     {
-        leftIntakeController.stopMotor();
-        rightIntakeController.stopMotor();
+        flip1.set(0);
     }
 }

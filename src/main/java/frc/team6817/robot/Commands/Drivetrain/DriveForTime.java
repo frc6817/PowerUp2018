@@ -34,7 +34,7 @@ public class DriveForTime extends Command
 
         requires(drivetrain);
         _leftPower = LEFT_POWER;
-        _rightPower = RIGHT_POWER;
+        _rightPower = -RIGHT_POWER;
         _time = TIME;
     }
 

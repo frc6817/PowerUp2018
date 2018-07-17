@@ -1,12 +1,13 @@
 package frc.team6817.robot.Commands.Drivetrain;
 
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.team6817.robot.OI;
-import frc.team6817.robot.Robot;
 
 import static frc.team6817.robot.Robot.drivetrain;
+import static frc.team6817.robot.RobotMap.*;
 
 
 /**
@@ -38,9 +39,11 @@ public class PrecisionDrive extends Command
         double leftY = -OI.controller1().getY(GenericHID.Hand.kLeft) * DRIVE_MULTIPLIER;
         double rightX = OI.controller1().getX(GenericHID.Hand.kRight) * DRIVE_MULTIPLIER;
 
-        drivetrain.drive().curvatureDrive(leftY , rightX , leftY <= .05);
+        frontLeftController.set(ControlMode.PercentOutput , leftY + rightX);
+        backLeftController.set(leftY + rightX);
 
-        Robot.dashServer.sendMessage("Slow" , "1");
+        frontRightController.set(ControlMode.PercentOutput , -(leftY - rightX));
+        backRightController.set(-(leftY - rightX));
     }
 
 

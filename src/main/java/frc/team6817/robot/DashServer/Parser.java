@@ -1,13 +1,10 @@
 package frc.team6817.robot.DashServer;
 
 
-import frc.team6817.robot.Autonomous.AutoLeft;
 import frc.team6817.robot.Commands.BlockIntake.ManualBlockIntake;
 import frc.team6817.robot.Commands.Drivetrain.PrecisionDrive;
 import frc.team6817.robot.Commands.Drivetrain.RotateToDegree;
 import frc.team6817.robot.Commands.Drivetrain.StandardDrive;
-import frc.team6817.robot.Commands.Flipper.ManualFlip;
-import frc.team6817.robot.Robot;
 
 
 /**
@@ -45,7 +42,6 @@ class Parser
                     switch(msg)
                     {
                         case "Left":
-                            Robot.auto = new AutoLeft();
                             break;
 
                         case "Center":
@@ -70,11 +66,10 @@ class Parser
                     break;
 
                 case "Flip":
-                    ManualFlip.THROTTLE = Double.valueOf(msg) / 100.0;
                     break;
 
                 case "Fly":
-                    ManualBlockIntake.THROTTLE = Double.valueOf(msg) / 100.0;
+                    ManualBlockIntake.INTAKE_THROTTLE = Double.valueOf(msg) / 100.0;
                     break;
 
                 case "TurnP":
